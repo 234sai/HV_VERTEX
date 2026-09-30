@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | HV VERTEX ELECTRONICS</title>
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/rigthxp5/image/upload/v1789156088/7ebab95d-6451-46d6-bd66-5cd62b322319.png">
+  <meta name="description" content="Learn about HV Vertex Electronics: our mission, problem-to-solution hardware engineering methodology, 100% bench-tested quality assurance, and future R&D.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    .font-orbitron { font-family: 'Orbitron', sans-serif; }
+    body { font-family: 'Orbitron', sans-serif; background-color: #030503; color: #e4e4e7; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #030503; }
+    ::-webkit-scrollbar-thumb { background: rgba(57, 214, 25, 0.4); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(57, 214, 25, 0.8); }
+    
+    .neon-glow {
+      box-shadow: 0 0 30px rgba(57, 214, 25, 0.35), inset 0 0 10px rgba(57, 214, 25, 0.2);
+    }
+    @keyframes fadeInNav { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
+    
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translate3d(0, 30px, 0);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-on-scroll.in-view {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+    #scroll-progress {
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .form-input {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 0.875rem 1.25rem;
+      width: 100%;
+      border-radius: 0.75rem;
+      transition: all 0.3s ease;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: rgba(57, 214, 25, 0.8);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 25px rgba(57, 214, 25, 0.2);
+    }
+    
+    #global-navigation {
+      position: fixed;
+      top: 1rem;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (min-width: 768px) {
+      #global-navigation { top: 1.5rem; padding-left: 1rem; padding-right: 1rem; }
+    }
+    
+    #main-nav {
+      width: 100%;
+      max-width: 1280px;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(57, 214, 25, 0.4);
+      background: rgba(5, 8, 5, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      #main-nav { border-radius: 9999px; }
+    }
+    #global-navigation.scrolled { top: 0.5rem; }
+    @media (min-width: 768px) {
+      #global-navigation.scrolled { top: 0.75rem; }
+    }
+    #main-nav.nav-scrolled {
+      max-width: 1120px;
+      background: rgba(5, 8, 5, 0.98);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.85);
+    }
+
+    .nav-link-box {
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.5rem;
+      transition: all 0.25s ease;
+    }
+    .nav-link-box:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #39d619 !important;
+    }
+    .nav-link-active {
+      background: rgba(57, 214, 25, 0.12);
+      color: #39d619 !important;
+      border: 1px solid rgba(57, 214, 25, 0.3);
+    }
+
+    .about-hero-heading {
+      width: 100%;
+      max-width: none;
+      overflow: visible;
+    }
+
+    .about-heading-line {
+      display: block;
+      width: max-content;
+      max-width: 100%;
+      white-space: nowrap;
+      transform-origin: left center;
+    }
+
+    .about-heading-line-1,
+    .about-heading-line-2 {
+      transform: none;
+    }
+
+    .hero-mix-bg {
+      background: radial-gradient(circle at 50% 10%, #0a2608 0%, #041004 45%, #030503 100%);
+    }
+  
+    body, input, textarea, select, button { font-family: 'Orbitron', sans-serif; }
+
+    .about-pillar-grid > div p { flex: 1 1 auto; }
+    .about-pillar-grid > div p { text-align: left; text-justify: auto; }
+    .about-pillar-grid > div { min-height: 390px; }
+    .about-pillar-grid > div h3 { min-height: 3.5rem; display:flex; align-items:flex-start; }
+    .about-pillar-grid > div p { min-height: 7.5rem; }
+
+    /* Keep Our Methodology / Problem-to-Solution section in its original alignment. */
+    .methodology-section p {
+      text-align: left !important;
+      text-align-last: left !important;
+    }
+    /* About Company hero copy keeps its original left alignment. */
+    .about-hero-copy {
+      text-align: left !important;
+      text-align-last: left !important;
+    }
+    /* Entire About Company section keeps original left-aligned body copy. */
+    #about p {
+      text-align: left !important;
+      text-align-last: left !important;
+    }
+</style>
+</head>
+
+<body class="text-zinc-300 overflow-x-hidden min-h-screen relative selection:bg-[#39d619]/30 selection:text-white bg-[#030503]">
+
+  <!-- NAVIGATION BAR -->
+  <header id="global-navigation">
+    <nav id="main-nav" style="animation: fadeInNav 0.6s ease-out forwards;">
+      <div class="flex w-full px-5 md:px-8 py-3.5 items-center justify-between relative gap-4">
+        
+        <a href="/" class="flex-shrink-0 flex items-center gap-2 group">
+          <img 
+            src="https://res.cloudinary.com/rigthxp5/image/upload/v1789156088/7ebab95d-6451-46d6-bd66-5cd62b322319.png" 
+            alt="HV Logo" 
+            class="h-7 sm:h-8 w-auto object-contain filter drop-shadow-[0_0_10px_rgba(57,214,25,0.6)] group-hover:scale-110 transition-transform duration-300"
+          />
+          <span class="font-orbitron text-xs md:text-sm font-bold text-white tracking-widest uppercase whitespace-nowrap">
+            HV VERTEX
+          </span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-2 lg:gap-3 flex-shrink-0">
+          <a href="/" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Home</a>
+          <a href="/products" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Products</a>
+          <a href="/students" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Students</a>
+          <a href="/about" class="nav-link-box nav-link-active text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] whitespace-nowrap">About Us</a>
+          <a href="/careers" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Careers</a>
+        </div>
+
+        <div class="flex items-center gap-2 flex-shrink-0">
+
+          <!-- Primary contact CTA (replaces the former account actions) -->
+          <a href="/contact" class="hidden md:inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full bg-[#39d619] text-black font-orbitron text-[10px] lg:text-[11px] font-semibold uppercase tracking-[0.12em] hover:bg-white transition-all duration-300 shadow-[0_0_18px_rgba(57,214,25,0.18)]">
+            Contact Us
+            <iconify-icon icon="solar:arrow-right-linear" width="15"></iconify-icon>
+          </a>
+
+          <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden flex items-center justify-center p-2 text-zinc-300 hover:text-[#39d619] focus:outline-none cursor-pointer" aria-label="Toggle Navigation">
+            <iconify-icon id="mobile-menu-icon" icon="solar:hamburger-menu-linear" width="24"></iconify-icon>
+          </button>
+        </div>
+
+      </div>
+
+      <div id="mobile-menu-dropdown" class="hidden md:hidden px-6 pt-3 pb-5 border-t border-white/10 flex flex-col gap-2.5 bg-black/50">
+        <a href="/" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Home</a>
+        <a href="/products" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Products</a>
+        <a href="/students" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Students</a>
+        <a href="/about" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-[#39d619] py-1.5 transition-colors">About Us</a>
+        <a href="/careers" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Careers</a>
+      </div>
+    </nav>
+  </header>
+
+  <div id="scroll-progress" class="fixed top-0 left-0 h-[2.5px] w-full z-[110] bg-gradient-to-r from-transparent via-[#39d619] to-[#29a810] pointer-events-none"></div>
+
+  <main class="relative z-10 w-full pt-32 sm:pt-36 pb-24">
+
+    <!-- HERO HEADER -->
+    <section class="hero-mix-bg py-16 sm:py-24 border-b border-white/10 relative">
+      <div class="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-24">
+        <div class="flex items-center gap-2 text-xs font-orbitron uppercase tracking-widest text-[#39d619] mb-4">
+          <a href="/" class="hover:underline text-zinc-400">Home</a>
+          <span>/</span>
+          <span class="text-[#39d619]">About Company</span>
+        </div>
+        
+        <div class="w-full max-w-none">
+          <span class="text-xs font-orbitron tracking-widest text-[#39d619] uppercase block mb-3 font-semibold">
+            About HV Vertex Electronics
+          </span>
+          <h1 class="about-hero-heading font-orbitron font-medium uppercase text-3xl sm:text-5xl lg:text-6xl text-white leading-[0.95] w-full">
+            <span class="about-heading-line about-heading-line-1">Bridging Hardware</span>
+            <span class="about-heading-line about-heading-line-2">With <span class="text-[#39d619]">Future Intelligence</span></span>
+          </h1>
+          <p class="about-hero-copy text-zinc-300 font-light mt-6 text-sm sm:text-base md:text-lg leading-relaxed">
+            "Technology should make life easier, not more complicated." We are an electronics engineering and manufacturing enterprise committed to designing smart retrofit modules, high-reliability microcontrollers, and automation platforms that turn tedious manual routines into automated simplicity.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE PILLARS: VISION, MISSION, SCOPE -->
+    <section class="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-24 py-16">
+      <div class="about-pillar-grid grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="bg-[#080808] border border-white/10 p-8 rounded-3xl relative h-full flex flex-col">
+          <div class="w-14 h-14 rounded-2xl border border-[#39d619]/40 bg-[#39d619]/5 flex items-center justify-center text-[#39d619] mb-6">
+            <iconify-icon icon="solar:eye-linear" width="30"></iconify-icon>
+          </div>
+          <span class="text-[10px] font-orbitron uppercase tracking-widest text-[#39d619] block mb-2">Our Vision</span>
+          <h3 class="font-orbitron text-xl text-white font-semibold mb-3">A Smarter, Connected World</h3>
+          <p class="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+            To build an intuitive, connected environment through accessible electronics and intelligent automation that scales from individual homes and college laboratories to modern industrial facilities.
+          </p>
+        </div>
+
+        <div class="bg-[#080808] border border-white/10 p-8 rounded-3xl relative h-full flex flex-col">
+          <div class="w-14 h-14 rounded-2xl border border-[#39d619]/40 bg-[#39d619]/5 flex items-center justify-center text-[#39d619] mb-6">
+            <iconify-icon icon="solar:target-linear" width="30"></iconify-icon>
+          </div>
+          <span class="text-[10px] font-orbitron uppercase tracking-widest text-[#39d619] block mb-2">Our Mission</span>
+          <h3 class="font-orbitron text-xl text-white font-semibold mb-3">Dependable Hardware</h3>
+          <p class="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+            Design, develop, manufacture, and supply reliable, affordable Arduino & ESP32 development boards, high-current motor drivers, robotics systems, and energy-saving automation modules.
+          </p>
+        </div>
+
+        <div class="bg-[#080808] border border-white/10 p-8 rounded-3xl relative h-full flex flex-col">
+          <div class="w-14 h-14 rounded-2xl border border-[#39d619]/40 bg-[#39d619]/5 flex items-center justify-center text-[#39d619] mb-6">
+            <iconify-icon icon="solar:compass-linear" width="30"></iconify-icon>
+          </div>
+          <span class="text-[10px] font-orbitron uppercase tracking-widest text-[#39d619] block mb-2">Future Scope</span>
+          <h3 class="font-orbitron text-xl text-white font-semibold mb-3">AI & Robotics Integration</h3>
+          <p class="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+            Pioneering autonomous robotics systems, intelligent predictive automation models, custom ASIC-level controllers, and integrated hardware-software developer tools.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- METHODOLOGY: PROBLEM TO SOLUTION -->
+    <section class="methodology-section py-20 bg-[#060a06] border-y border-white/10">
+      <div class="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-24">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-xs font-orbitron tracking-widest text-[#39d619] uppercase block mb-3">Engineering Rigor</span>
+          <h2 class="font-orbitron uppercase text-3xl sm:text-4xl text-white font-semibold">Our Problem-to-Solution Cycle</h2>
+          <p class="text-zinc-400 text-xs sm:text-sm font-light mt-3">Every product at HV Vertex undergoes an uncompromising engineering lifecycle.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-[#080808] border border-white/10 p-6 rounded-2xl text-center">
+            <div class="w-14 h-14 mx-auto rounded-full bg-[#39d619]/10 border border-[#39d619]/40 flex items-center justify-center text-[#39d619] font-orbitron font-bold text-lg mb-4">
+              01
+            </div>
+            <h4 class="font-orbitron text-base text-white font-medium mb-2">Identify Daily Friction</h4>
+            <p class="text-xs text-zinc-400 font-light">Target manual inefficiencies: forgotten switches, complex wiring, or unbuffered motor stalls.</p>
+          </div>
+
+          <div class="bg-[#080808] border border-white/10 p-6 rounded-2xl text-center">
+            <div class="w-14 h-14 mx-auto rounded-full bg-[#39d619]/10 border border-[#39d619]/40 flex items-center justify-center text-[#39d619] font-orbitron font-bold text-lg mb-4">
+              02
+            </div>
+            <h4 class="font-orbitron text-base text-white font-medium mb-2">Hardware Prototyping</h4>
+            <p class="text-xs text-zinc-400 font-light">Design multi-layer PCBs, thermal relief zones, and optocoupler noise barrier circuitry.</p>
+          </div>
+
+          <div class="bg-[#080808] border border-white/10 p-6 rounded-2xl text-center">
+            <div class="w-14 h-14 mx-auto rounded-full bg-[#39d619]/10 border border-[#39d619]/40 flex items-center justify-center text-[#39d619] font-orbitron font-bold text-lg mb-4">
+              03
+            </div>
+            <h4 class="font-orbitron text-base text-white font-medium mb-2">Embedded Intelligence</h4>
+            <p class="text-xs text-zinc-400 font-light">Implement firmware logic, dynamic PWM control, Wi-Fi telemetry, and failsafe cutoffs.</p>
+          </div>
+
+          <div class="bg-[#080808] border border-white/10 p-6 rounded-2xl text-center">
+            <div class="w-14 h-14 mx-auto rounded-full bg-[#39d619]/10 border border-[#39d619]/40 flex items-center justify-center text-[#39d619] font-orbitron font-bold text-lg mb-4">
+              04
+            </div>
+            <h4 class="font-orbitron text-base text-white font-medium mb-2">Bench Validation</h4>
+            <p class="text-xs text-zinc-400 font-light">100% test-bench verification under rated load before packing and nationwide dispatch.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUALITY ASSURANCE & WARRANTY -->
+    <section class="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-24 py-20">
+      <div class="bg-[#080808] border border-[#39d619]/30 rounded-3xl p-8 sm:p-14 relative overflow-hidden">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <span class="text-xs font-orbitron text-[#39d619] uppercase tracking-widest block mb-3">Testing Protocol</span>
+            <h2 class="font-orbitron uppercase text-2xl sm:text-4xl text-white font-semibold leading-tight">
+              100% Quality & Bench Tested Assurance
+            </h2>
+            <p class="text-zinc-300 font-light text-xs sm:text-sm leading-relaxed mt-4">
+              Electronics failures in the field are unacceptable. That's why every batch manufactured or supplied by HV Vertex Electronics undergoes rigorous quality checks:
+            </p>
+            <ul class="space-y-3 mt-6 text-xs sm:text-sm text-zinc-300">
+              <li class="flex items-center gap-3"><iconify-icon icon="solar:shield-check-linear" class="text-[#39d619]" width="22"></iconify-icon> Voltage surge and reverse polarity testing</li>
+              <li class="flex items-center gap-3"><iconify-icon icon="solar:shield-check-linear" class="text-[#39d619]" width="22"></iconify-icon> Full-load thermal testing with heat sink verification</li>
+              <li class="flex items-center gap-3"><iconify-icon icon="solar:shield-check-linear" class="text-[#39d619]" width="22"></iconify-icon> Wireless RF signal integrity & BLE transmission range checks</li>
+              <li class="flex items-center gap-3"><iconify-icon icon="solar:shield-check-linear" class="text-[#39d619]" width="22"></iconify-icon> Warranty assurance backed with direct engineering replacement</li>
+            </ul>
+          </div>
+
+          <div class="bg-black/60 border border-white/10 p-8 rounded-2xl flex flex-col justify-between">
+            <h4 class="font-orbitron text-lg text-white font-semibold mb-4">Connect With Leadership & Engineers</h4>
+            <p class="text-xs text-zinc-400 font-light leading-relaxed mb-6">
+              Have questions regarding custom OEM manufacturing, college project sponsorships, or product distribution? Our engineering team is directly reachable.
+            </p>
+            <div class="space-y-3 text-xs text-zinc-300 mb-8">
+              <div class="flex items-center gap-2"><iconify-icon icon="solar:letter-linear" class="text-[#39d619]"></iconify-icon> hr@hvvertex.in</div>
+              <div class="flex items-center gap-2"><iconify-icon icon="solar:phone-calling-linear" class="text-[#39d619]"></iconify-icon> +91 9182503188 / +91 91827 36781</div>
+            </div>
+            <a href="/contact" class="w-full text-center bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-3.5 rounded-full font-semibold hover:bg-white transition-all">
+              Reach Out To Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-black pt-16 sm:pt-20 pb-10 px-5 sm:px-8 md:px-12 lg:px-24 relative z-20 border-t border-white/10">
+    <div class="max-w-[1400px] mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 md:gap-16 mb-12 sm:mb-16">
+        <div class="sm:col-span-2 md:col-span-2">
+          <a href="/" class="inline-flex items-center gap-2.5 sm:gap-3 mb-4 sm:mb-6 group">
+            <img src="https://res.cloudinary.com/rigthxp5/image/upload/v1789156088/7ebab95d-6451-46d6-bd66-5cd62b322319.png" alt="HV Logo" class="h-8 sm:h-9 w-auto object-contain filter drop-shadow-[0_0_8px_rgba(57,214,25,0.6)]"/>
+            <span class="font-orbitron font-bold text-white tracking-widest text-base sm:text-lg">HV VERTEX ELECTRONICS</span>
+          </a>
+          <p class="text-zinc-500 font-light text-xs sm:text-sm max-w-sm mb-4 sm:mb-6 leading-relaxed">
+            Developing, manufacturing, and supplying smart controllers, development boards, and automation solutions. Build. Connect. Automate. Simplify.
+          </p>
+          <div class="text-xs text-zinc-400 space-y-2">
+            <a href="mailto:hr@hvvertex.in" class="flex items-start gap-2 hover:text-[#39d619] transition-colors">
+              <iconify-icon icon="solar:letter-linear" class="text-[#39d619] mt-0.5 shrink-0"></iconify-icon>
+              <span>hr@hvvertex.in</span>
+            </a>
+            <div class="flex items-start gap-2">
+              <iconify-icon icon="solar:phone-calling-linear" class="text-[#39d619] mt-0.5 shrink-0"></iconify-icon>
+              <span>+91 9182503188 / +91 91827 36781</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <iconify-icon icon="solar:map-point-linear" class="text-[#39d619] mt-0.5 shrink-0"></iconify-icon>
+              <span>28-22-6, Prakasraopeta, Boddu Naidu Street, Andhra Pradesh 530020</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-orbitron font-medium text-[10px] text-zinc-500 uppercase tracking-widest mb-4 sm:mb-6">Product Portfolio</h4>
+          <ul class="space-y-2.5 sm:space-y-3 text-xs sm:text-sm font-light text-zinc-400">
+            <li><a href="/products?filter=mcu" class="hover:text-[#39d619] transition-colors">Microcontrollers & Boards</a></li>
+            <li><a href="/products?filter=hardware" class="hover:text-[#39d619] transition-colors">Precision Screws & Hardware</a></li>
+            <li><a href="/products?filter=driver" class="hover:text-[#39d619] transition-colors">Motor Drivers (20A / 60A)</a></li>
+            <li><a href="/products?filter=automation" class="hover:text-[#39d619] transition-colors">Home Automation</a></li>
+            <li><a href="/products?filter=robotics" class="hover:text-[#39d619] transition-colors">Industrial PLCs & Robotics</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-orbitron font-medium text-[10px] text-zinc-500 uppercase tracking-widest mb-4 sm:mb-6">Navigation</h4>
+          <ul class="space-y-2.5 sm:space-y-3 text-xs sm:text-sm font-light text-zinc-400">
+            <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
+            <li><a href="/products" class="hover:text-white transition-colors">Products</a></li>
+            <li><a href="/about" class="text-[#39d619]">About Company</a></li>
+            <li><a href="/students" class="hover:text-white transition-colors">Student Portal</a></li>
+            <li><a href="/careers" class="hover:text-white transition-colors">Careers</a></li>
+            <li><a href="/contact" class="hover:text-white transition-colors">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 text-center sm:text-left">
+        <p class="text-zinc-600 text-[10px] font-orbitron uppercase tracking-widest">© 2026 HV VERTEX ELECTRONICS. All rights reserved.</p>
+        <div class="flex gap-4 sm:gap-6 text-[10px] font-orbitron uppercase tracking-widest text-zinc-600">
+          <span>Best Quality</span><span>Fast Delivery</span><span>Warranty Assurance</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/api.js"></script>
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu-dropdown');
+      const icon = document.getElementById('mobile-menu-icon');
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        icon.setAttribute('icon', 'solar:close-circle-linear');
+      } else {
+        menu.classList.add('hidden');
+        icon.setAttribute('icon', 'solar:hamburger-menu-linear');
+      }
+    }
+
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      const progressBar = document.getElementById('scroll-progress');
+      if (progressBar) {
+        progressBar.style.transform = `scaleX(${scrolled / 100})`;
+      }
+
+      const navContainer = document.getElementById('global-navigation');
+      const nav = document.getElementById('main-nav');
+      if (window.scrollY > 40) {
+        navContainer.classList.add('scrolled');
+        nav.classList.add('nav-scrolled');
+      } else {
+        navContainer.classList.remove('scrolled');
+        nav.classList.remove('nav-scrolled');
+      }
+    });
+  </script>
+
+</body>
+</html>

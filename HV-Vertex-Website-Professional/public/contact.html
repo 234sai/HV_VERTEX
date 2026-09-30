@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Inquiries | HV VERTEX ELECTRONICS</title>
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/rigthxp5/image/upload/v1789156088/7ebab95d-6451-46d6-bd66-5cd62b322319.png">
+  <meta name="description" content="Contact HV Vertex Electronics for product inquiries, bulk college orders, custom microcontroller engineering, motor drivers, or career opportunities.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    .font-orbitron { font-family: 'Orbitron', sans-serif; }
+    body { font-family: 'Orbitron', sans-serif; background-color: #030503; color: #e4e4e7; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #030503; }
+    ::-webkit-scrollbar-thumb { background: rgba(57, 214, 25, 0.4); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(57, 214, 25, 0.8); }
+    
+    .neon-glow {
+      box-shadow: 0 0 30px rgba(57, 214, 25, 0.35), inset 0 0 10px rgba(57, 214, 25, 0.2);
+    }
+    @keyframes fadeInNav { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
+    
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translate3d(0, 30px, 0);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-on-scroll.in-view {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+    #scroll-progress {
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .form-input {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 0.875rem 1.25rem;
+      width: 100%;
+      border-radius: 0.75rem;
+      transition: all 0.3s ease;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: rgba(57, 214, 25, 0.8);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 25px rgba(57, 214, 25, 0.2);
+    }
+    select.form-input option {
+      background-color: #111111;
+      color: white;
+    }
+    
+    #global-navigation {
+      position: fixed;
+      top: 1rem;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (min-width: 768px) {
+      #global-navigation { top: 1.5rem; padding-left: 1rem; padding-right: 1rem; }
+    }
+    
+    #main-nav {
+      width: 100%;
+      max-width: 1280px;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(57, 214, 25, 0.4);
+      background: rgba(5, 8, 5, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      #main-nav { border-radius: 9999px; }
+    }
+    #global-navigation.scrolled { top: 0.5rem; }
+    @media (min-width: 768px) {
+      #global-navigation.scrolled { top: 0.75rem; }
+    }
+    #main-nav.nav-scrolled {
+      max-width: 1120px;
+      background: rgba(5, 8, 5, 0.98);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.85);
+    }
+
+    .nav-link-box {
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.5rem;
+      transition: all 0.25s ease;
+    }
+    .nav-link-box:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #39d619 !important;
+    }
+    .nav-link-active {
+      background: rgba(57, 214, 25, 0.12);
+      color: #39d619 !important;
+      border: 1px solid rgba(57, 214, 25, 0.3);
+    }
+
+    .hero-mix-bg {
+      background: radial-gradient(circle at 50% 10%, #0a2608 0%, #041004 45%, #030503 100%);
+    }
+  
+    body, input, textarea, select, button { font-family: 'Orbitron', sans-serif; }
+
+</style>
+</head>
+
+<body class="text-zinc-300 overflow-x-hidden min-h-screen relative selection:bg-[#39d619]/30 selection:text-white bg-[#030503]">
+
+  <!-- NAVIGATION BAR -->
+  <header id="global-navigation">
+    <nav id="main-nav" style="animation: fadeInNav 0.6s ease-out forwards;">
+      <div class="flex w-full px-5 md:px-8 py-3.5 items-center justify-between relative gap-4">
+        
+        <a href="/" class="flex-shrink-0 flex items-center gap-2 group">
+          <img 
+            src="https://res.cloudinary.com/rigthxp5/image/upload/v1789156088/7ebab95d-6451-46d6-bd66-5cd62b322319.png" 
+            alt="HV Logo" 
+            class="h-7 sm:h-8 w-auto object-contain filter drop-shadow-[0_0_10px_rgba(57,214,25,0.6)] group-hover:scale-110 transition-transform duration-300"
+          />
+          <span class="font-orbitron text-xs md:text-sm font-bold text-white tracking-widest uppercase whitespace-nowrap">
+            HV VERTEX
+          </span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-2 lg:gap-3 flex-shrink-0">
+          <a href="/" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Home</a>
+          <a href="/products" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Products</a>
+          <a href="/students" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Students</a>
+          <a href="/about" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">About Us</a>
+          <a href="/careers" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Careers</a>
+        </div>
+
+        <div class="flex items-center gap-2 flex-shrink-0">
+
+          <!-- Primary contact CTA (replaces the former account actions) -->
+          <a href="/contact" class="hidden md:inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full bg-[#39d619] text-black font-orbitron text-[10px] lg:text-[11px] font-semibold uppercase tracking-[0.12em] hover:bg-white transition-all duration-300 shadow-[0_0_18px_rgba(57,214,25,0.18)]">
+            Contact Us
+            <iconify-icon icon="solar:arrow-right-linear" width="15"></iconify-icon>
+          </a>
+
+          <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden flex items-center justify-center p-2 text-zinc-300 hover:text-[#39d619] focus:outline-none cursor-pointer" aria-label="Toggle Navigation">
+            <iconify-icon id="mobile-menu-icon" icon="solar:hamburger-menu-linear" width="24"></iconify-icon>
+          </button>
+        </div>
+
+      </div>
+
+      <div id="mobile-menu-dropdown" class="hidden md:hidden px-6 pt-3 pb-5 border-t border-white/10 flex flex-col gap-2.5 bg-black/50">
+        <a href="/" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Home</a>
+        <a href="/products" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Products</a>
+        <a href="/students" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Students</a>
+        <a href="/about" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">About Us</a>
+        <a href="/careers" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Careers</a>
+      </div>
+    </nav>
+  </header>
+
+  <div id="scroll-progress" class="fixed top-0 left-0 h-[2.5px] w-full z-[110] bg-gradient-to-r from-transparent via-[#39d619] to-[#29a810] pointer-events-none"></div>
+
+  <main class="relative z-10 w-full pt-32 sm:pt-36 pb-24">
+
+    <!-- HERO HEADER -->
+    <section class="hero-mix-bg py-16 sm:py-24 border-b border-white/10 relative">
+      <div class="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-24">
+        <div class="flex items-center gap-2 text-xs font-orbitron uppercase tracking-widest text-[#39d619] mb-4">
+          <a href="/" class="hover:underline text-zinc-400">Home</a>
+          <span>/</span>
+          <span class="text-[#39d619]">Contact Us</span>
+        </div>
+        
+        <div class="max-w-3xl">
+          <span class="text-xs font-orbitron tracking-widest text-[#39d619] uppercase block mb-3 font-semibold">
+            Direct Engineering Desk
+          </span>
+          <h1 class="font-orbitron font-medium uppercase tracking-tighter text-3xl sm:text-5xl lg:text-6xl text-white leading-tight">
+            Connect With <span class="text-[#39d619]">HV Vertex.</span>
+          </h1>
+          <p class="text-zinc-300 font-light mt-4 text-sm sm:text-base md:text-lg leading-relaxed">
+            Have questions regarding our microcontrollers, 20A/60A motor drivers, smart home modules, student discount kits, or custom embedded solutions? We are ready to assist.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT GRID & FORM -->
+    <section class="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-24 py-16">
+      <div class="grid lg:grid-cols-5 gap-12 sm:gap-16 items-start">
+        
+        <!-- Left Column: Contact Cards -->
+        <div class="lg:col-span-2 space-y-6">
+          
+          <div class="bg-[#080808] border border-white/10 p-6 sm:p-8 rounded-3xl">
+            <h3 class="font-orbitron text-lg text-white font-semibold uppercase tracking-wider mb-6 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#39d619] animate-pulse"></span>
+              Direct Phone Lines
+            </h3>
+
+            <div class="space-y-4">
+              <div class="flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.02] border border-white/5">
+                <div>
+                  <span class="text-[10px] font-orbitron uppercase text-[#39d619] tracking-widest block">Primary Line</span>
+                  <a href="tel:+919182503188" class="text-white font-medium text-sm hover:text-[#39d619] transition-colors">+91 9182503188</a>
+                </div>
+                <a href="tel:+919182503188" class="w-9 h-9 rounded-full bg-[#39d619]/10 text-[#39d619] flex items-center justify-center hover:bg-[#39d619] hover:text-black transition-all">
+                  <iconify-icon icon="solar:phone-calling-linear" width="18"></iconify-icon>
+                </a>
+              </div>
+
+              <div class="flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.02] border border-white/5">
+                <div>
+                  <span class="text-[10px] font-orbitron uppercase text-[#39d619] tracking-widest block">Secondary Line</span>
+                  <a href="tel:+919182736781" class="text-white font-medium text-sm hover:text-[#39d619] transition-colors">+91 91827 36781</a>
+                </div>
+                <a href="tel:+919182736781" class="w-9 h-9 rounded-full bg-[#39d619]/10 text-[#39d619] flex items-center justify-center hover:bg-[#39d619] hover:text-black transition-all">
+                  <iconify-icon icon="solar:phone-calling-linear" width="18"></iconify-icon>
+                </a>
+              </div>
+            </div>
+
+            <!-- WhatsApp Instant Button -->
+            <a href="https://wa.me/919182503188?text=Hello%20HV%20Vertex%20Electronics%2C%20I%20have%20an%20inquiry" target="_blank" class="w-full mt-6 inline-flex items-center justify-center gap-2 bg-[#25D366] text-black font-orbitron text-xs uppercase tracking-widest py-3.5 rounded-full font-semibold hover:bg-white transition-all shadow-[0_0_20px_rgba(37,211,102,0.3)]">
+              <iconify-icon icon="solar:chat-round-dots-linear" width="18"></iconify-icon>
+              <span>Chat On WhatsApp</span>
+            </a>
+          </div>
+
+          <div class="bg-[#080808] border border-white/10 p-6 sm:p-8 rounded-3xl">
+            <h3 class="font-orbitron text-lg text-white font-semibold uppercase tracking-wider mb-4">
+              Official Email
+            </h3>
+            <p class="text-xs text-zinc-400 font-light mb-3">For purchase orders, datasheets, schematic reviews, and academic programs:</p>
+            <a href="mailto:hr@hvvertex.in" class="text-[#39d619] font-orbitron text-sm hover:underline block break-all">
+              hr@hvvertex.in
+            </a>
+          </div>
+
+          <div class="bg-[#080808] border border-white/10 p-6 sm:p-8 rounded-3xl">
+            <h3 class="font-orbitron text-lg text-white font-semibold uppercase tracking-wider mb-2">
+              Pan-India Supply & Dispatch
+            </h3>
+            <p class="text-xs text-zinc-400 font-light leading-relaxed">
+              We dispatch hardware packages daily via express courier services to colleges, makerspaces, and industries across all states in India.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Interactive Inquiry Form -->
+        <div class="lg:col-span-3 bg-[#080808] border border-white/15 p-8 sm:p-12 rounded-3xl shadow-2xl">
+          <div class="mb-8">
+            <span class="text-xs font-orbitron text-[#39d619] uppercase tracking-widest block mb-1">Inquiry Form</span>
+            <h2 class="font-orbitron text-2xl sm:text-3xl text-white font-semibold">Send Detailed Project Specifications</h2>
+          </div>
+
+          <form id="contact-form" class="space-y-5" onsubmit="handleContactSubmit(event)">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label for="name" class="font-orbitron text-[10px] uppercase tracking-widest text-zinc-400 mb-2 block">Your Name</label>
+                <input type="text" id="name" required placeholder="Fill Your Name" class="form-input text-sm">
+              </div>
+              <div>
+                <label for="phone" class="font-orbitron text-[10px] uppercase tracking-widest text-zinc-400 mb-2 block">Phone Number</label>
+                <input type="tel" id="phone" required placeholder="+91 xxxxxxxxxx" class="form-input text-sm">
+              </div>
+            </div>
+
+            <div>
+              <label for="email" class="font-orbitron text-[10px] uppercase tracking-widest text-zinc-400 mb-2 block">Email Address</label>
+              <input type="email" id="email" required placeholder="contact@domain.com" class="form-input text-sm">
+            </div>
+
+            <div>
+              <label for="service-select" class="font-orbitron text-[10px] uppercase tracking-widest text-zinc-400 mb-2 block">Inquiry Category</label>
+              <select id="service-select" required class="form-input text-sm">
+                <option value="" disabled selected>Select an option</option>
+                <option value="Microcontrollers">Microcontrollers & Development Boards</option>
+                <option value="Motor Drivers">Motor Drivers (20A / 60A DC/BLDC)</option>
+                <option value="Precision Screws">Precision Screws & Hardware (M2/M3/M4)</option>
+                <option value="Home Automation">Home Automation Retrofit Systems</option>
+                <option value="Industrial PLC">Industrial PLCs & Relays</option>
+                <option value="Robotics Hardware">Robotics Hardware Platforms</option>
+                <option value="Student Kit">Student Project Materials & Academic Discount</option>
+                <option value="Custom Engineering">Bespoke Custom Electronic Engineering</option>
+                <option value="Careers">Career Opportunity Inquiry</option>
+                <option value="General">General Inquiry</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="font-orbitron text-[10px] uppercase tracking-widest text-zinc-400 mb-2 block">Requirements / Project Scope</label>
+              <textarea id="message" rows="4" required placeholder="Include quantities, component models, operating voltages, or project deadline..." class="form-input text-sm resize-none"></textarea>
+            </div>
+
+            <button id="contact-submit-btn" type="submit" class="w-full bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-4 rounded-full font-semibold hover:bg-white transition-all shadow-[0_0_25px_rgba(57,214,25,0.3)] cursor-pointer flex items-center justify-center gap-2">
+              <span>Send Inquiry Message</span>
+              <iconify-icon icon="solar:plain-3-linear" width="18"></iconify-icon>
+            </button>
+            <div id="contact-status-msg" class="text-center font-orbitron text-xs p-3 rounded-xl hidden"></div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-black pt-16 sm:pt-20 pb-10 px-5 sm:px-8 md:px-12 lg:px-24 relative z-20 border-t border-white/10">
+    <div class="max-w-[1400px] mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 md:gap-16 mb-12 sm:mb-16">
+        <div class="sm:col-span-2 md:col-span-2">
+          <a href="/" class="inline-flex items-center gap-2.5 sm:gap-3 mb-4 sm:mb-6 group">
+            <img src="https://res.cloudinary.com/rigthxp5/image/upload/v1789156088/7ebab95d-6451-46d6-bd66-5cd62b322319.png" alt="HV Logo" class="h-8 sm:h-9 w-auto object-contain filter drop-shadow-[0_0_8px_rgba(57,214,25,0.6)]"/>
+            <span class="font-orbitron font-bold text-white tracking-widest text-base sm:text-lg">HV VERTEX ELECTRONICS</span>
+          </a>
+          <p class="text-zinc-500 font-light text-xs sm:text-sm max-w-sm mb-4 sm:mb-6 leading-relaxed">
+            Developing, manufacturing, and supplying smart controllers, development boards, and automation solutions. Build. Connect. Automate. Simplify.
+          </p>
+          <div class="text-xs text-zinc-400 space-y-2">
+            <a href="mailto:hr@hvvertex.in" class="flex items-start gap-2 hover:text-[#39d619] transition-colors">
+              <iconify-icon icon="solar:letter-linear" class="text-[#39d619] mt-0.5 shrink-0"></iconify-icon>
+              <span>hr@hvvertex.in</span>
+            </a>
+            <div class="flex items-start gap-2">
+              <iconify-icon icon="solar:phone-calling-linear" class="text-[#39d619] mt-0.5 shrink-0"></iconify-icon>
+              <span>+91 9182503188 / +91 91827 36781</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <iconify-icon icon="solar:map-point-linear" class="text-[#39d619] mt-0.5 shrink-0"></iconify-icon>
+              <span>28-22-6, Prakasraopeta, Boddu Naidu Street, Andhra Pradesh 530020</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-orbitron font-medium text-[10px] text-zinc-500 uppercase tracking-widest mb-4 sm:mb-6">Product Portfolio</h4>
+          <ul class="space-y-2.5 sm:space-y-3 text-xs sm:text-sm font-light text-zinc-400">
+            <li><a href="/products?filter=mcu" class="hover:text-[#39d619] transition-colors">Microcontrollers & Boards</a></li>
+            <li><a href="/products?filter=hardware" class="hover:text-[#39d619] transition-colors">Precision Screws & Hardware</a></li>
+            <li><a href="/products?filter=driver" class="hover:text-[#39d619] transition-colors">Motor Drivers (20A / 60A)</a></li>
+            <li><a href="/products?filter=automation" class="hover:text-[#39d619] transition-colors">Home Automation</a></li>
+            <li><a href="/products?filter=robotics" class="hover:text-[#39d619] transition-colors">Industrial PLCs & Robotics</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-orbitron font-medium text-[10px] text-zinc-500 uppercase tracking-widest mb-4 sm:mb-6">Navigation</h4>
+          <ul class="space-y-2.5 sm:space-y-3 text-xs sm:text-sm font-light text-zinc-400">
+            <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
+            <li><a href="/products" class="hover:text-white transition-colors">Products</a></li>
+            <li><a href="/about" class="hover:text-white transition-colors">About Company</a></li>
+            <li><a href="/students" class="hover:text-white transition-colors">Student Portal</a></li>
+            <li><a href="/careers" class="hover:text-white transition-colors">Careers</a></li>
+            <li><a href="/contact" class="text-[#39d619]">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 text-center sm:text-left">
+        <p class="text-zinc-600 text-[10px] font-orbitron uppercase tracking-widest">© 2026 HV VERTEX ELECTRONICS. All rights reserved.</p>
+        <div class="flex gap-4 sm:gap-6 text-[10px] font-orbitron uppercase tracking-widest text-zinc-600">
+          <span>Best Quality</span><span>Fast Delivery</span><span>Warranty Assurance</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/api.js"></script>
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu-dropdown');
+      const icon = document.getElementById('mobile-menu-icon');
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        icon.setAttribute('icon', 'solar:close-circle-linear');
+      } else {
+        menu.classList.add('hidden');
+        icon.setAttribute('icon', 'solar:hamburger-menu-linear');
+      }
+    }
+
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      const progressBar = document.getElementById('scroll-progress');
+      if (progressBar) {
+        progressBar.style.transform = `scaleX(${scrolled / 100})`;
+      }
+
+      const navContainer = document.getElementById('global-navigation');
+      const nav = document.getElementById('main-nav');
+      if (window.scrollY > 40) {
+        navContainer.classList.add('scrolled');
+        nav.classList.add('nav-scrolled');
+      } else {
+        navContainer.classList.remove('scrolled');
+        nav.classList.remove('nav-scrolled');
+      }
+    });
+  </script>
+
+</body>
+</html>

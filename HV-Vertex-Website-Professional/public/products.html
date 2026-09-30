@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products & Hardware Ecosystem | HV VERTEX ELECTRONICS</title>
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/rigthxp5/image/upload/v1789156088/7ebab95d-6451-46d6-bd66-5cd62b322319.png">
+  <meta name="description" content="Explore HV Vertex Electronics products: proprietary microcontrollers, 20A/60A motor drivers, intelligent home automation modules, precision screws, and custom systems.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    .font-orbitron { font-family: 'Orbitron', sans-serif; }
+    body { font-family: 'Orbitron', sans-serif; background-color: #030503; color: #e4e4e7; overflow-x: hidden; }
+    body, input, textarea, select, button { font-family: 'Orbitron', sans-serif; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #030503; }
+    ::-webkit-scrollbar-thumb { background: rgba(57, 214, 25, 0.4); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(57, 214, 25, 0.8); }
+    
+    .neon-glow {
+      box-shadow: 0 0 30px rgba(57, 214, 25, 0.35), inset 0 0 10px rgba(57, 214, 25, 0.2);
+    }
+    @keyframes fadeInNav { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
+    
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translate3d(0, 30px, 0);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-on-scroll.in-view {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+    #scroll-progress {
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .form-input {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 0.875rem 1.25rem;
+      width: 100%;
+      border-radius: 0.75rem;
+      transition: all 0.3s ease;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: rgba(57, 214, 25, 0.8);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 25px rgba(57, 214, 25, 0.2);
+    }
+    
+    /* Fixed Navigation Bar Container */
+    #global-navigation {
+      position: fixed;
+      top: 1rem;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (min-width: 768px) {
+      #global-navigation { top: 1.5rem; padding-left: 1rem; padding-right: 1rem; }
+    }
+    
+    #main-nav {
+      width: 100%;
+      max-width: 1280px;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(57, 214, 25, 0.4);
+      background: rgba(5, 8, 5, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      #main-nav { border-radius: 9999px; }
+    }
+    #global-navigation.scrolled { top: 0.5rem; }
+    @media (min-width: 768px) {
+      #global-navigation.scrolled { top: 0.75rem; }
+    }
+    #main-nav.nav-scrolled {
+      max-width: 1120px;
+      background: rgba(5, 8, 5, 0.98);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.85);
+    }
+
+    .nav-link-box {
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.5rem;
+      transition: all 0.25s ease;
+    }
+    .nav-link-box:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #39d619 !important;
+    }
+    .nav-link-active {
+      background: rgba(57, 214, 25, 0.12);
+      color: #39d619 !important;
+      border: 1px solid rgba(57, 214, 25, 0.3);
+    }
+
+    .products-hero-heading span { white-space: nowrap; }
+    @media (min-width: 1024px) {
+      .products-hero-heading { font-size: clamp(3.2rem, 5.1vw, 5.5rem); }
+    }
+
+    .hero-mix-bg {
+      background: radial-gradient(circle at 50% 10%, #0a2608 0%, #041004 45%, #030503 100%);
+    }
+
+    .filter-btn.active {
+      background-color: #39d619;
+      color: #050505;
+      border-color: #39d619;
+      box-shadow: 0 0 15px rgba(57, 214, 25, 0.4);
+    }
+
+    .product-grid-card p { text-align: left; text-justify: auto; }
+    .product-grid-card { min-height: 0; height: auto; }
+    .product-grid-card > div:last-child { flex:1 1 auto; }
+    .product-grid-card > div:last-child > div:first-child h3 { min-height: 3.5rem; display:flex; align-items:flex-start; }
+    .product-grid-card > div:last-child > div:first-child p { min-height: 5rem; }
+
+    .product-grid-card {
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .product-grid-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(57, 214, 25, 0.5);
+      box-shadow: 0 15px 35px -10px rgba(57, 214, 25, 0.25);
+    }
+  
+</style>
+</head>
+
+<body class="text-zinc-300 overflow-x-hidden min-h-screen relative selection:bg-[#39d619]/30 selection:text-white bg-[#030503]">
+
+  <!-- NAVIGATION BAR -->
+  <header id="global-navigation">
+    <nav id="main-nav" style="animation: fadeInNav 0.6s ease-out forwards;">
+      <div class="flex w-full px-5 md:px-8 py-3.5 items-center justify-between relative gap-4">
+        
+        <a href="/" class="flex-shrink-0 flex items-center gap-2 group">
+          <img 
+            src="https://res.cloudinary.com/rigthxp5/image/upload/v1789156088/7ebab95d-6451-46d6-bd66-5cd62b322319.png" 
+            alt="HV Logo" 
+            class="h-7 sm:h-8 w-auto object-contain filter drop-shadow-[0_0_10px_rgba(57,214,25,0.6)] group-hover:scale-110 transition-transform duration-300"
+          />
+          <span class="font-orbitron text-xs md:text-sm font-bold text-white tracking-widest uppercase whitespace-nowrap">
+            HV VERTEX
+          </span>
+        </a>
+
+        <!-- Desktop Menu Links -->
+        <div class="hidden md:flex items-center gap-2 lg:gap-3 flex-shrink-0">
+          <a href="/" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Home</a>
+          <a href="/products" class="nav-link-box nav-link-active text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] whitespace-nowrap">Products</a>
+          <a href="/students" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Students</a>
+          <a href="/about" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">About Us</a>
+          <a href="/careers" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Careers</a>
+          <a href="/contact" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Contact</a>
+        </div>
+
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <a href="/contact" class="hidden md:inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full bg-[#39d619] text-black font-orbitron text-[10px] lg:text-[11px] font-semibold uppercase tracking-[0.12em] hover:bg-white transition-all duration-300 shadow-[0_0_18px_rgba(57,214,25,0.18)]">
+            Contact Us
+            <iconify-icon icon="solar:arrow-right-linear" width="15"></iconify-icon>
+          </a>
+
+          <!-- Mobile Hamburger Toggle Button -->
+          <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden flex items-center justify-center p-2 text-zinc-300 hover:text-[#39d619] focus:outline-none cursor-pointer" aria-label="Toggle Navigation">
+            <iconify-icon id="mobile-menu-icon" icon="solar:hamburger-menu-linear" width="24"></iconify-icon>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-menu-dropdown" class="hidden md:hidden px-6 pt-3 pb-5 border-t border-white/10 flex flex-col gap-2.5 bg-black/50">
+        <a href="/" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Home</a>
+        <a href="/products" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-[#39d619] py-1.5 transition-colors">Products</a>
+        <a href="/students" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Students</a>
+        <a href="/about" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">About Us</a>
+        <a href="/careers" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Careers</a>
+        <a href="/contact" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <div id="scroll-progress" class="fixed top-0 left-0 h-[2.5px] w-full z-[110] bg-gradient-to-r from-transparent via-[#39d619] to-[#29a810] pointer-events-none"></div>
+
+  <main class="relative z-10 w-full pt-32 sm:pt-36 pb-24">
+
+    <!-- HERO / TITLE SECTION -->
+    <section class="hero-mix-bg py-16 sm:py-24 border-b border-white/10 relative overflow-hidden">
+      <div class="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-24 relative z-10">
+        <div class="flex items-center gap-2 text-xs font-orbitron uppercase tracking-widest text-[#39d619] mb-4">
+          <a href="/" class="hover:underline text-zinc-400">Home</a>
+          <span>/</span>
+          <span class="text-[#39d619]">Products & Hardware</span>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+          <div>
+            <h1 class="products-hero-heading font-orbitron font-medium uppercase tracking-tighter text-3xl sm:text-5xl lg:text-6xl text-white leading-tight">
+              <span class="block whitespace-nowrap">Hardware Products &</span>
+              <span class="block whitespace-nowrap text-[#39d619]">Electronic Ecosystem</span>
+            </h1>
+            <p class="text-zinc-300 font-light max-w-2xl mt-4 text-sm sm:text-base md:text-lg leading-relaxed">
+              Explore our complete range of proprietary microcontrollers, 20A/60A motor drivers, IoT home automation systems, precision electronic screws, and custom-engineered solutions.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-3">
+            <a href="/contact" class="inline-flex items-center gap-2 bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest px-6 py-3.5 rounded-full font-semibold hover:bg-white transition-all shadow-[0_0_20px_rgba(57,214,25,0.3)]">
+              <span>Bulk Order / Inquiry</span>
+              <iconify-icon icon="solar:plain-3-linear" width="18"></iconify-icon>
+            </a>
+            <a href="/students" class="inline-flex items-center gap-2 bg-white/5 border border-white/15 text-white font-orbitron text-xs uppercase tracking-widest px-6 py-3.5 rounded-full hover:border-[#39d619] hover:text-[#39d619] transition-all">
+              <iconify-icon icon="solar:diploma-linear" width="16"></iconify-icon>
+              <span>Student Kits</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEARCH & FILTER BAR -->
+    <section class="bg-[#080808] border-b border-white/10 sticky top-[72px] z-40 backdrop-blur-md bg-opacity-95 py-4">
+      <div class="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-24">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          
+          <!-- Filter Categories -->
+          <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none text-xs font-orbitron">
+            <button onclick="filterProducts('all')" id="btn-filter-all" class="filter-btn active whitespace-nowrap px-4 py-2 rounded-full border border-white/10 text-zinc-300 hover:border-[#39d619] transition-all cursor-pointer">
+              All Products
+            </button>
+            <button onclick="filterProducts('mcu')" id="btn-filter-mcu" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full border border-white/10 text-zinc-300 hover:border-[#39d619] transition-all cursor-pointer">
+              Microcontrollers
+            </button>
+            <button onclick="filterProducts('driver')" id="btn-filter-driver" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full border border-white/10 text-zinc-300 hover:border-[#39d619] transition-all cursor-pointer">
+              Motor Drivers
+            </button>
+            <button onclick="filterProducts('hardware')" id="btn-filter-hardware" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full border border-white/10 text-zinc-300 hover:border-[#39d619] transition-all cursor-pointer">
+              Precision Hardware
+            </button>
+            <button onclick="filterProducts('robotics')" id="btn-filter-robotics" class="filter-btn whitespace-nowrap px-4 py-2 rounded-full border border-white/10 text-zinc-300 hover:border-[#39d619] transition-all cursor-pointer">
+              Robotics & PLC
+            </button>
+          </div>
+
+          <!-- Search Box -->
+          <div class="w-full md:w-72 relative">
+            <input 
+              type="text" 
+              id="product-search" 
+              onkeyup="searchProducts()" 
+              placeholder="Search specifications or models..." 
+              class="w-full bg-white/5 border border-white/10 text-white placeholder-zinc-500 rounded-full py-2 pl-9 pr-4 text-xs font-inter focus:outline-none focus:border-[#39d619]"
+            />
+            <iconify-icon icon="solar:magnifer-linear" width="16" class="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500"></iconify-icon>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS GRID -->
+    <section class="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-24 py-16">
+      
+      <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- 1. MICROCONTROLLERS (With User Image: MICROCONTROLLER.png) -->
+        <div class="product-grid-card product-item bg-[#080808] border border-white/15 rounded-3xl overflow-hidden flex flex-col justify-between" data-category="mcu" data-keywords="microcontroller mcu board arduino esp32 processor bluetooth wifi">
+          <div class="relative bg-white p-3 sm:p-4 flex items-center justify-center border-b border-white/20 h-64 sm:h-72 overflow-hidden group">
+            <img 
+              src="/assets/images/MICROCONTROLLER.png" 
+              alt="HV Microcontrollers & Development Boards" 
+              class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+            />
+            <span class="absolute top-3 left-3 bg-black/90 backdrop-blur-md border border-[#39d619]/50 text-[#39d619] text-[10px] font-orbitron uppercase tracking-widest px-3 py-1 rounded-full shadow-md">
+              Proprietary & Standard
+            </span>
+            <span class="absolute top-3 right-3 bg-black/90 backdrop-blur-md text-white text-[10px] font-orbitron px-2.5 py-1 rounded-full border border-white/20 shadow-md">
+              BLE + Wi-Fi
+            </span>
+          </div>
+
+          <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-orbitron text-xl text-white font-semibold mb-2 group-hover:text-[#39d619] transition-colors">
+                HV-Core Microcontrollers & Boards
+              </h3>
+              <p class="text-xs text-zinc-400 font-light leading-relaxed mb-4">
+                Compact and high-pinout computing boards with Bluetooth and Wi-Fi modules, built for rapid hardware integration, prototyping, and smart embedded devices.
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-orbitron uppercase text-zinc-500 block">Stock & Supply</span>
+                <span class="text-xs font-orbitron text-[#39d619] font-medium">In Stock • Fast Dispatch</span>
+              </div>
+              <a href="/contact?product=Microcontroller" class="inline-flex items-center gap-1.5 bg-[#39d619] text-black font-orbitron text-[11px] uppercase tracking-wider px-4 py-2 rounded-full font-semibold hover:bg-white transition-all cursor-pointer">
+                <span>Inquire</span>
+                <iconify-icon icon="solar:arrow-right-linear" width="14"></iconify-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. PRECISION SCREWS & HARDWARE (With User Image: PRECISION_SCREWS_AND_HARDWARE.jpeg) -->
+        <div class="product-grid-card product-item bg-[#080808] border border-white/15 rounded-3xl overflow-hidden flex flex-col justify-between" data-category="hardware" data-keywords="precision screws hardware standoffs nuts bolts m2 m3 m4 chassis brass nylon">
+          <div class="relative bg-white p-3 sm:p-4 flex items-center justify-center border-b border-white/20 h-64 sm:h-72 overflow-hidden group">
+            <img 
+              src="/assets/images/FASTENERS_AND_HARDWARE.jpg" 
+              alt="Precision Screws, Standoffs, and Mechanical Hardware" 
+              class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+
+          <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-orbitron text-xl text-white font-semibold mb-2 group-hover:text-[#39d619] transition-colors">
+                Precision Screws, Standoffs & Hardware
+              </h3>
+              <p class="text-xs text-zinc-400 font-light leading-relaxed mb-4">
+                Assorted CNC metric hex screws, brass standoffs, nylon spacers, locking nuts, and mounting hardware engineered specifically for printed circuit boards and electronic enclosures.
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-orbitron uppercase text-zinc-500 block">Packaging</span>
+                <span class="text-xs font-orbitron text-[#39d619] font-medium">Bulk & Student Packs</span>
+              </div>
+              <a href="/contact?product=Hardware" class="inline-flex items-center gap-1.5 bg-[#39d619] text-black font-orbitron text-[11px] uppercase tracking-wider px-4 py-2 rounded-full font-semibold hover:bg-white transition-all cursor-pointer">
+                <span>Inquire</span>
+                <iconify-icon icon="solar:arrow-right-linear" width="14"></iconify-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. HOME AUTOMATION (With User Image: HOME_AUTOMATION.jpg) -->
+        <div class="product-grid-card product-item bg-[#080808] border border-white/15 rounded-3xl overflow-hidden flex flex-col justify-between" data-category="automation" data-keywords="home automation smart switch wifi temperature fan ac retrofit iot">
+          <div class="relative bg-white p-3 sm:p-4 flex items-center justify-center border-b border-white/20 h-64 sm:h-72 overflow-hidden group">
+            <img 
+              src="/assets/images/HOME_AUTOMATION.jpg" 
+              alt="Smart Home Automation Systems" 
+              class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+            />
+            <span class="absolute top-3 left-3 bg-black/90 backdrop-blur-md border border-[#39d619]/50 text-[#39d619] text-[10px] font-orbitron uppercase tracking-widest px-3 py-1 rounded-full shadow-md">
+              Demo Available
+            </span>
+            <span class="absolute top-3 right-3 bg-black/90 backdrop-blur-md text-white text-[10px] font-orbitron px-2.5 py-1 rounded-full border border-white/20 shadow-md">
+              Zero-Rewiring
+            </span>
+          </div>
+
+          <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-orbitron text-xl text-white font-semibold mb-2 group-hover:text-[#39d619] transition-colors">
+                Intelligent Home Automation Modules
+              </h3>
+              <p class="text-xs text-zinc-400 font-light leading-relaxed mb-4">
+                Smart retrofit switch controllers for air conditioning, dynamic temperature-triggered fans, automated lighting, and remote smartphone control without tearing into existing walls.
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-orbitron uppercase text-zinc-500 block">Installation</span>
+                <span class="text-xs font-orbitron text-[#39d619] font-medium">Retrofit Switchboard</span>
+              </div>
+              <a href="/contact?product=HomeAutomation" class="inline-flex items-center gap-1.5 bg-[#39d619] text-black font-orbitron text-[11px] uppercase tracking-wider px-4 py-2 rounded-full font-semibold hover:bg-white transition-all cursor-pointer">
+                <span>Inquire</span>
+                <iconify-icon icon="solar:arrow-right-linear" width="14"></iconify-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. MOTOR DRIVERS (With User Image: MOTOR_DRIVERS.jpg) -->
+        <div class="product-grid-card product-item bg-[#080808] border border-white/15 rounded-3xl overflow-hidden flex flex-col justify-between" data-category="driver" data-keywords="motor driver 20a 60a bldc dc robotics h-bridge pwm heat sink">
+          <div class="relative bg-white p-3 sm:p-4 flex items-center justify-center border-b border-white/20 h-64 sm:h-72 overflow-hidden group">
+            <img 
+              src="/assets/images/MOTOR_DRIVERS.jpg" 
+              alt="High-Performance Motor Drivers 20A and 60A" 
+              class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+            />
+            <span class="absolute top-3 left-3 bg-black/90 backdrop-blur-md border border-[#39d619]/50 text-[#39d619] text-[10px] font-orbitron uppercase tracking-widest px-3 py-1 rounded-full shadow-md">
+              20A & 60A Heavy Duty
+            </span>
+            <span class="absolute top-3 right-3 bg-black/90 backdrop-blur-md text-white text-[10px] font-orbitron px-2.5 py-1 rounded-full border border-white/20 shadow-md">
+              DC / BLDC Ready
+            </span>
+          </div>
+
+          <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-orbitron text-xl text-white font-semibold mb-2 group-hover:text-[#39d619] transition-colors">
+                High-Current Motor Drivers (20A / 60A)
+              </h3>
+              <p class="text-xs text-zinc-400 font-light leading-relaxed mb-4">
+                Industrial-grade dual H-bridge motor drivers engineered with oversized aluminum heatsinks, optoisolated signal gates, and robust flywheel protection for robotics and heavy automation.
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-orbitron uppercase text-zinc-500 block">Configurations</span>
+                <span class="text-xs font-orbitron text-[#39d619] font-medium">Single / Dual Channel</span>
+              </div>
+              <a href="/contact?product=MotorDriver" class="inline-flex items-center gap-1.5 bg-[#39d619] text-black font-orbitron text-[11px] uppercase tracking-wider px-4 py-2 rounded-full font-semibold hover:bg-white transition-all cursor-pointer">
+                <span>Inquire</span>
+                <iconify-icon icon="solar:arrow-right-linear" width="14"></iconify-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. INDUSTRIAL PLCs (With User Image: INDUSTRAIL_PLCS.jpeg) -->
+        <div class="product-grid-card product-item bg-[#080808] border border-white/15 rounded-3xl overflow-hidden flex flex-col justify-between" data-category="robotics" data-keywords="industrial plc programmable logic controller automation relay din rail">
+          <div class="relative bg-white p-3 sm:p-4 flex items-center justify-center border-b border-white/20 h-64 sm:h-72 overflow-hidden group">
+            <img 
+              src="/assets/images/INDUSTRAIL_PLCS.jpeg" 
+              alt="Industrial PLCs" 
+              class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+            />
+            <span class="absolute top-3 left-3 bg-black/90 backdrop-blur-md border border-[#39d619]/50 text-[#39d619] text-[10px] font-orbitron uppercase tracking-widest px-3 py-1 rounded-full shadow-md">
+              Process & Automation
+            </span>
+            <span class="absolute top-3 right-3 bg-black/90 backdrop-blur-md text-white text-[10px] font-orbitron px-2.5 py-1 rounded-full border border-white/20 shadow-md">
+              DIN Rail
+            </span>
+          </div>
+
+          <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-orbitron text-xl text-white font-semibold mb-2 group-hover:text-[#39d619] transition-colors">
+                Compact Industrial PLCs
+              </h3>
+              <p class="text-xs text-zinc-400 font-light leading-relaxed mb-4">
+                Ruggedized micro-programmable logic controllers built for conveyor systems, pump sequences, motor starters, and small industrial automation lines.
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-orbitron uppercase text-zinc-500 block">Integration</span>
+                <span class="text-xs font-orbitron text-[#39d619] font-medium">Modbus RTU Standard</span>
+              </div>
+              <a href="/contact?product=IndustrialPLC" class="inline-flex items-center gap-1.5 bg-[#39d619] text-black font-orbitron text-[11px] uppercase tracking-wider px-4 py-2 rounded-full font-semibold hover:bg-white transition-all cursor-pointer">
+                <span>Inquire</span>
+                <iconify-icon icon="solar:arrow-right-linear" width="14"></iconify-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. ROBOTICS HARDWARE PLATFORMS (With User Image: ROBOTIC_HARDWARE.jpg) -->
+        <div class="product-grid-card product-item bg-[#080808] border border-white/15 rounded-3xl overflow-hidden flex flex-col justify-between" data-category="robotics" data-keywords="robotics chassis wheel autonomous rover sensors encoder kit">
+          <div class="relative bg-white p-3 sm:p-4 flex items-center justify-center border-b border-white/20 h-64 sm:h-72 overflow-hidden group">
+            <img 
+              src="/assets/images/ROBOTIC_HARDWARE.jpg" 
+              alt="Robotics Hardware Platforms" 
+              class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+            />
+            <span class="absolute top-3 left-3 bg-black/90 backdrop-blur-md border border-[#39d619]/50 text-[#39d619] text-[10px] font-orbitron uppercase tracking-widest px-3 py-1 rounded-full shadow-md">
+              Mechanical & Electrical
+            </span>
+            <span class="absolute top-3 right-3 bg-black/90 backdrop-blur-md text-white text-[10px] font-orbitron px-2.5 py-1 rounded-full border border-white/20 shadow-md">
+              Autonomous
+            </span>
+          </div>
+
+          <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-orbitron text-xl text-white font-semibold mb-2 group-hover:text-[#39d619] transition-colors">
+                Modular Robotics Hardware Platforms
+              </h3>
+              <p class="text-xs text-zinc-400 font-light leading-relaxed mb-4">
+                Chassis assemblies, encoder motor mounts, omni-wheels, and LiDAR brackets designed for robotics students, makers, and autonomous prototyping teams.
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-orbitron uppercase text-zinc-500 block">Structure</span>
+                <span class="text-xs font-orbitron text-[#39d619] font-medium">Modular Aluminum</span>
+              </div>
+              <a href="/contact?product=RoboticsHardware" class="inline-flex items-center gap-1.5 bg-[#39d619] text-black font-orbitron text-[11px] uppercase tracking-wider px-4 py-2 rounded-full font-semibold hover:bg-white transition-all cursor-pointer">
+                <span>Inquire</span>
+                <iconify-icon icon="solar:arrow-right-linear" width="14"></iconify-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. CUSTOM ENGINEERING SYSTEMS (With User Image: CUSTOM_ENGINEERING.jpeg) -->
+        <div class="product-grid-card product-item bg-[#080808] border border-white/15 rounded-3xl overflow-hidden flex flex-col justify-between" data-category="mcu" data-keywords="custom systems pcb firmware prototype bespoke design turnkey">
+          <div class="relative bg-white p-3 sm:p-4 flex items-center justify-center border-b border-white/20 h-64 sm:h-72 overflow-hidden group">
+            <img 
+              src="/assets/images/CUSTOM_ENGINEERING.jpeg" 
+              alt="Bespoke Custom Electronic Systems" 
+              class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+            />
+            <span class="absolute top-3 left-3 bg-black/90 backdrop-blur-md border border-[#39d619]/50 text-[#39d619] text-[10px] font-orbitron uppercase tracking-widest px-3 py-1 rounded-full shadow-md">
+              Custom Engineering
+            </span>
+            <span class="absolute top-3 right-3 bg-black/90 backdrop-blur-md text-white text-[10px] font-orbitron px-2.5 py-1 rounded-full border border-white/20 shadow-md">
+              Turnkey
+            </span>
+          </div>
+
+          <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-orbitron text-xl text-white font-semibold mb-2 group-hover:text-[#39d619] transition-colors">
+                Bespoke Custom Electronic Systems
+              </h3>
+              <p class="text-xs text-zinc-400 font-light leading-relaxed mb-4">
+                Tailored microcontrollers, custom motor controllers, embedded firmware, and specialized sensor breakouts manufactured according to your custom pinout and dimension requirements.
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-orbitron uppercase text-zinc-500 block">Service Model</span>
+                <span class="text-xs font-orbitron text-[#39d619] font-medium">Concept to Hardware</span>
+              </div>
+              <a href="/contact?product=CustomEngineering" class="inline-flex items-center gap-1.5 bg-[#39d619] text-black font-orbitron text-[11px] uppercase tracking-wider px-4 py-2 rounded-full font-semibold hover:bg-white transition-all cursor-pointer">
+                <span>Inquire</span>
+                <iconify-icon icon="solar:arrow-right-linear" width="14"></iconify-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+      <!-- No Results Message -->
+      <div id="no-products-message" class="hidden text-center py-20">
+        <iconify-icon icon="solar:magnifer-broken" width="48" class="text-zinc-600 mb-3"></iconify-icon>
+        <p class="font-orbitron text-sm uppercase tracking-widest text-zinc-400">No matching products found</p>
+        <button onclick="resetFilters()" class="mt-4 text-xs font-orbitron text-[#39d619] hover:underline cursor-pointer">Reset Filters</button>
+      </div>
+
+    </section>
+
+    <!-- ASSURANCE BANNER -->
+    <section class="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-24 mb-12">
+      <div class="bg-gradient-to-r from-zinc-950 via-[#0a1f08] to-zinc-950 border border-[#39d619]/30 rounded-3xl p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <span class="text-[10px] font-orbitron text-[#39d619] uppercase tracking-widest block mb-2">HV Vertex Quality & Custom Solutions</span>
+          <h3 class="font-orbitron text-2xl sm:text-3xl text-white font-medium">Quality Tested. Built To Your Requirements.</h3>
+          <p class="text-xs sm:text-sm text-zinc-300 font-light mt-2 max-w-2xl leading-relaxed">
+            Every motor driver, microcontroller, and automation module undergoes rigorous burn-in and functional test bench validation prior to dispatch. Need a specific microcontroller, specialized sensor, battery management system, or custom electronic solution? Tell us what you need and our team can discuss the right product or custom build.
+          </p>
+        </div>
+        <div class="flex-shrink-0 flex gap-4">
+          <a href="/contact" class="inline-flex items-center gap-2 bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest px-6 py-4 rounded-full font-semibold hover:bg-white transition-all shadow-[0_0_25px_rgba(57,214,25,0.3)]">
+            <span>Discuss Your Requirement</span>
+            <iconify-icon icon="solar:phone-calling-linear" width="18"></iconify-icon>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-black pt-16 sm:pt-20 pb-10 px-5 sm:px-8 md:px-12 lg:px-24 relative z-20 border-t border-white/10">
+    <div class="max-w-[1400px] mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 md:gap-16 mb-12 sm:mb-16">
+        <div class="sm:col-span-2 md:col-span-2">
+          <a href="/" class="inline-flex items-center gap-2.5 sm:gap-3 mb-4 sm:mb-6 group">
+            <img src="https://res.cloudinary.com/rigthxp5/image/upload/v1789156088/7ebab95d-6451-46d6-bd66-5cd62b322319.png" alt="HV Logo" class="h-8 sm:h-9 w-auto object-contain filter drop-shadow-[0_0_8px_rgba(57,214,25,0.6)]"/>
+            <span class="font-orbitron font-bold text-white tracking-widest text-base sm:text-lg">HV VERTEX ELECTRONICS</span>
+          </a>
+          <p class="text-zinc-500 font-light text-xs sm:text-sm max-w-sm mb-4 sm:mb-6 leading-relaxed">
+            Developing, manufacturing, and supplying smart controllers, development boards, and automation solutions. Build. Connect. Automate. Simplify.
+          </p>
+          <div class="text-xs text-zinc-400 space-y-2">
+            <a href="mailto:hr@hvvertex.in" class="flex items-start gap-2 hover:text-[#39d619] transition-colors">
+              <iconify-icon icon="solar:letter-linear" class="text-[#39d619] mt-0.5 shrink-0"></iconify-icon>
+              <span>hr@hvvertex.in</span>
+            </a>
+            <div class="flex items-start gap-2">
+              <iconify-icon icon="solar:phone-calling-linear" class="text-[#39d619] mt-0.5 shrink-0"></iconify-icon>
+              <span>+91 9182503188 / +91 91827 36781</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <iconify-icon icon="solar:map-point-linear" class="text-[#39d619] mt-0.5 shrink-0"></iconify-icon>
+              <span>28-22-6, Prakasraopeta, Boddu Naidu Street, Andhra Pradesh 530020</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-orbitron font-medium text-[10px] text-zinc-500 uppercase tracking-widest mb-4 sm:mb-6">Product Portfolio</h4>
+          <ul class="space-y-2.5 sm:space-y-3 text-xs sm:text-sm font-light text-zinc-400">
+            <li><a href="/products?filter=mcu" class="hover:text-[#39d619] transition-colors">Microcontrollers & Boards</a></li>
+            <li><a href="/products?filter=hardware" class="hover:text-[#39d619] transition-colors">Precision Screws & Hardware</a></li>
+            <li><a href="/products?filter=driver" class="hover:text-[#39d619] transition-colors">Motor Drivers (20A / 60A)</a></li>
+            <li><a href="/products?filter=automation" class="hover:text-[#39d619] transition-colors">Home Automation</a></li>
+            <li><a href="/products?filter=robotics" class="hover:text-[#39d619] transition-colors">Industrial PLCs & Robotics</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-orbitron font-medium text-[10px] text-zinc-500 uppercase tracking-widest mb-4 sm:mb-6">Navigation</h4>
+          <ul class="space-y-2.5 sm:space-y-3 text-xs sm:text-sm font-light text-zinc-400">
+            <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
+            <li><a href="/products" class="text-[#39d619]">Products</a></li>
+            <li><a href="/about" class="hover:text-white transition-colors">About Company</a></li>
+            <li><a href="/students" class="hover:text-white transition-colors">Student Portal</a></li>
+            <li><a href="/careers" class="hover:text-white transition-colors">Careers</a></li>
+            <li><a href="/contact" class="hover:text-white transition-colors">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 text-center sm:text-left">
+        <p class="text-zinc-600 text-[10px] font-orbitron uppercase tracking-widest">© 2026 HV VERTEX ELECTRONICS. All rights reserved.</p>
+        <div class="flex gap-4 sm:gap-6 text-[10px] font-orbitron uppercase tracking-widest text-zinc-600">
+          <span>Best Quality</span><span>Fast Delivery</span><span>Warranty Assurance</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script src="/assets/js/api.js"></script>
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu-dropdown');
+      const icon = document.getElementById('mobile-menu-icon');
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        icon.setAttribute('icon', 'solar:close-circle-linear');
+      } else {
+        menu.classList.add('hidden');
+        icon.setAttribute('icon', 'solar:hamburger-menu-linear');
+      }
+    }
+
+    // Scroll Progress & Navbar Effect
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      const progressBar = document.getElementById('scroll-progress');
+      if (progressBar) {
+        progressBar.style.transform = `scaleX(${scrolled / 100})`;
+      }
+
+      const navContainer = document.getElementById('global-navigation');
+      const nav = document.getElementById('main-nav');
+      if (window.scrollY > 40) {
+        navContainer.classList.add('scrolled');
+        nav.classList.add('nav-scrolled');
+      } else {
+        navContainer.classList.remove('scrolled');
+        nav.classList.remove('nav-scrolled');
+      }
+    });
+
+    // Product Filtering
+    let currentCategory = 'all';
+
+    function filterProducts(category) {
+      currentCategory = category;
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      const activeBtn = document.getElementById(`btn-filter-${category}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      applyFilters();
+    }
+
+    function searchProducts() {
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const query = document.getElementById('product-search').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.product-item');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const itemCat = card.getAttribute('data-category');
+        const keywords = (card.getAttribute('data-keywords') || '') + ' ' + card.innerText.toLowerCase();
+
+        const matchesCat = (currentCategory === 'all') || (itemCat === currentCategory) || (itemCat === 'all');
+        const matchesQuery = !query || keywords.includes(query);
+
+        if (matchesCat && matchesQuery) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      const noMsg = document.getElementById('no-products-message');
+      if (visibleCount === 0) {
+        noMsg.classList.remove('hidden');
+      } else {
+        noMsg.classList.add('hidden');
+      }
+    }
+
+    function resetFilters() {
+      document.getElementById('product-search').value = '';
+      filterProducts('all');
+    }
+
+    // Check URL parameters for preset filter
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const filter = params.get('filter');
+      if (filter && ['mcu', 'driver', 'hardware', 'robotics'].includes(filter)) {
+        filterProducts(filter);
+      }
+    });
+  </script>
+
+</body>
+</html>

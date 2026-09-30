@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers & Openings | HV VERTEX ELECTRONICS</title>
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/rigthxp5/image/upload/v1789156088/7ebab95d-6451-46d6-bd66-5cd62b322319.png">
+  <meta name="description" content="Explore career openings at HV Vertex Electronics. Join us in building next-generation microcontrollers, motor drivers, robotics, and intelligent automation.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    .font-orbitron { font-family: 'Orbitron', sans-serif; }
+    body { font-family: 'Orbitron', sans-serif; background-color: #030503; color: #e4e4e7; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #030503; }
+    ::-webkit-scrollbar-thumb { background: rgba(57, 214, 25, 0.4); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(57, 214, 25, 0.8); }
+    
+    .neon-glow {
+      box-shadow: 0 0 30px rgba(57, 214, 25, 0.35), inset 0 0 10px rgba(57, 214, 25, 0.2);
+    }
+    @keyframes fadeInNav { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
+    
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translate3d(0, 30px, 0);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-on-scroll.in-view {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+    #scroll-progress {
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .form-input {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 0.875rem 1.25rem;
+      width: 100%;
+      border-radius: 0.75rem;
+      transition: all 0.3s ease;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: rgba(57, 214, 25, 0.8);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 25px rgba(57, 214, 25, 0.2);
+    }
+    select.form-input option {
+      background-color: #111111;
+      color: white;
+    }
+    
+    #global-navigation {
+      position: fixed;
+      top: 1rem;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (min-width: 768px) {
+      #global-navigation { top: 1.5rem; padding-left: 1rem; padding-right: 1rem; }
+    }
+    
+    #main-nav {
+      width: 100%;
+      max-width: 1280px;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(57, 214, 25, 0.4);
+      background: rgba(5, 8, 5, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      #main-nav { border-radius: 9999px; }
+    }
+    #global-navigation.scrolled { top: 0.5rem; }
+    @media (min-width: 768px) {
+      #global-navigation.scrolled { top: 0.75rem; }
+    }
+    #main-nav.nav-scrolled {
+      max-width: 1120px;
+      background: rgba(5, 8, 5, 0.98);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.85);
+    }
+
+    .nav-link-box {
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.5rem;
+      transition: all 0.25s ease;
+    }
+    .nav-link-box:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #39d619 !important;
+    }
+    .nav-link-active {
+      background: rgba(57, 214, 25, 0.12);
+      color: #39d619 !important;
+      border: 1px solid rgba(57, 214, 25, 0.3);
+    }
+
+    .hero-mix-bg {
+      background: radial-gradient(circle at 50% 10%, #0a2608 0%, #041004 45%, #030503 100%);
+    }
+  
+    body, input, textarea, select, button { font-family: 'Orbitron', sans-serif; }
+
+    .career-role-grid p { text-align: left; text-justify: auto; }
+    .career-role-grid { align-items: start; }
+    .career-role-grid > div { min-height: 0; height: auto; }
+    .career-role-grid > div h3 { min-height: 3.5rem; display:flex; align-items:flex-start; }
+    .career-role-grid > div > div > p { min-height: 4.5rem; }
+
+</style>
+</head>
+
+<body class="text-zinc-300 overflow-x-hidden min-h-screen relative selection:bg-[#39d619]/30 selection:text-white bg-[#030503]">
+
+  <!-- NAVIGATION BAR -->
+  <header id="global-navigation">
+    <nav id="main-nav" style="animation: fadeInNav 0.6s ease-out forwards;">
+      <div class="flex w-full px-5 md:px-8 py-3.5 items-center justify-between relative gap-4">
+        
+        <a href="/" class="flex-shrink-0 flex items-center gap-2 group">
+          <img 
+            src="https://res.cloudinary.com/rigthxp5/image/upload/v1789156088/7ebab95d-6451-46d6-bd66-5cd62b322319.png" 
+            alt="HV Logo" 
+            class="h-7 sm:h-8 w-auto object-contain filter drop-shadow-[0_0_10px_rgba(57,214,25,0.6)] group-hover:scale-110 transition-transform duration-300"
+          />
+          <span class="font-orbitron text-xs md:text-sm font-bold text-white tracking-widest uppercase whitespace-nowrap">
+            HV VERTEX
+          </span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-2 lg:gap-3 flex-shrink-0">
+          <a href="/" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Home</a>
+          <a href="/products" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Products</a>
+          <a href="/students" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">Students</a>
+          <a href="/about" class="nav-link-box text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] text-white/70 whitespace-nowrap">About Us</a>
+          <a href="/careers" class="nav-link-box nav-link-active text-[11px] lg:text-[12px] font-orbitron font-semibold uppercase tracking-[0.15em] whitespace-nowrap">Careers</a>
+        </div>
+
+        <div class="flex items-center gap-2 flex-shrink-0">
+
+          <!-- Primary contact CTA (replaces the former account actions) -->
+          <a href="/contact" class="hidden md:inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full bg-[#39d619] text-black font-orbitron text-[10px] lg:text-[11px] font-semibold uppercase tracking-[0.12em] hover:bg-white transition-all duration-300 shadow-[0_0_18px_rgba(57,214,25,0.18)]">
+            Contact Us
+            <iconify-icon icon="solar:arrow-right-linear" width="15"></iconify-icon>
+          </a>
+
+          <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden flex items-center justify-center p-2 text-zinc-300 hover:text-[#39d619] focus:outline-none cursor-pointer" aria-label="Toggle Navigation">
+            <iconify-icon id="mobile-menu-icon" icon="solar:hamburger-menu-linear" width="24"></iconify-icon>
+          </button>
+        </div>
+
+      </div>
+
+      <div id="mobile-menu-dropdown" class="hidden md:hidden px-6 pt-3 pb-5 border-t border-white/10 flex flex-col gap-2.5 bg-black/50">
+        <a href="/" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Home</a>
+        <a href="/products" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Products</a>
+        <a href="/students" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">Students</a>
+        <a href="/about" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-white/80 hover:text-[#39d619] py-1.5 transition-colors">About Us</a>
+        <a href="/careers" class="text-xs font-orbitron font-semibold uppercase tracking-widest text-[#39d619] py-1.5 transition-colors">Careers</a>
+      </div>
+    </nav>
+  </header>
+
+  <div id="scroll-progress" class="fixed top-0 left-0 h-[2.5px] w-full z-[110] bg-gradient-to-r from-transparent via-[#39d619] to-[#29a810] pointer-events-none"></div>
+
+  <main class="relative z-10 w-full pt-32 sm:pt-36 pb-24">
+
+    <!-- HERO HEADER -->
+    <section class="hero-mix-bg py-16 sm:py-24 border-b border-white/10 relative">
+      <div class="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-24">
+        <div class="flex items-center gap-2 text-xs font-orbitron uppercase tracking-widest text-[#39d619] mb-4">
+          <a href="/" class="hover:underline text-zinc-400">Home</a>
+          <span>/</span>
+          <span class="text-[#39d619]">Careers</span>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+          <div>
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#39d619]/10 border border-[#39d619]/30 text-[#39d619] text-[10px] font-orbitron uppercase tracking-widest mb-4">
+              <iconify-icon icon="solar:briefcase-linear" width="16"></iconify-icon> Join The Engineering Team
+            </span>
+            <h1 class="font-orbitron font-medium uppercase tracking-tighter text-3xl sm:text-5xl lg:text-6xl text-white leading-tight">
+              Build Hardware That<br><span class="text-[#39d619]">Powers The Future</span>
+            </h1>
+            <p class="text-zinc-300 font-light max-w-2xl mt-4 text-sm sm:text-base md:text-lg leading-relaxed">
+              We are assembling a multidisciplinary team of circuit designers, embedded firmware engineers, and modern software developers. Work on real hardware products shipped directly to customers.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-3">
+            <a href="#apply-section" class="inline-flex items-center gap-2 bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest px-6 py-3.5 rounded-full font-semibold hover:bg-white transition-all shadow-[0_0_20px_rgba(57,214,25,0.3)]">
+              <span>Apply Online</span>
+              <iconify-icon icon="solar:arrow-down-linear" width="16"></iconify-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOB OPENINGS LISTINGS -->
+    <section class="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 lg:px-24 py-16">
+      <div class="mb-10">
+        <span class="text-xs font-orbitron uppercase text-[#39d619] tracking-widest">Active Positions</span>
+        <h2 class="font-orbitron text-2xl sm:text-4xl text-white font-semibold mt-1">Current Job Openings</h2>
+      </div>
+
+      <div class="career-role-grid grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Role 1: Electrical Design Engineer -->
+        <div class="bg-[#080808] border border-white/10 hover:border-[#39d619]/50 rounded-3xl p-8 flex flex-col transition-all">
+          <div>
+            <div class="flex flex-col sm:flex-row justify-between items-start gap-2 mb-4">
+              <div>
+                <span class="text-[10px] font-orbitron text-[#39d619] uppercase tracking-widest">Hardware Engineering</span>
+                <h3 class="font-orbitron text-xl sm:text-2xl text-white font-semibold mt-1">Electrical Design Engineer</h3>
+              </div>
+              <span class="bg-[#39d619]/10 border border-[#39d619]/30 text-[#39d619] font-orbitron text-xs px-4 py-1.5 rounded-full whitespace-nowrap">
+                ₹2,00,000 / Annum
+              </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed mb-6">
+              Responsible for schematic capture, multi-layer PCB layout, microcontroller hardware integration, 20A/60A motor driver prototyping, and test bench verification under load.
+            </p>
+
+            <div class="space-y-2 mb-6 text-xs text-zinc-300">
+              <div class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-[#39d619]"></iconify-icon> Experience with KiCad / Altium Designer</div>
+              <div class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-[#39d619]"></iconify-icon> Hands-on soldering and circuit debugging with DMM/DSO</div>
+              <div class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-[#39d619]"></iconify-icon> Knowledge of ESP32, STM32, and high-power MOSFET gating</div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-8">
+              <span class="text-[10px] uppercase font-orbitron bg-white/5 px-3 py-1 rounded-full text-zinc-300">PCB Design</span>
+              <span class="text-[10px] uppercase font-orbitron bg-white/5 px-3 py-1 rounded-full text-zinc-300">Hardware Test</span>
+              <span class="text-[10px] uppercase font-orbitron bg-white/5 px-3 py-1 rounded-full text-zinc-300">Full Time</span>
+            </div>
+          </div>
+
+          <a href="#apply-section" onclick="preselectRole('Electrical Design Engineer')" data-career-role="Electrical Design Engineer" class="w-full text-center bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-3 rounded-full font-semibold hover:bg-white transition-all">
+            Apply For This Position
+          </a>
+        </div>
+
+        <!-- Role 2: Web Developer / Frontend -->
+        <div class="bg-[#080808] border border-white/10 hover:border-[#39d619]/50 rounded-3xl p-8 flex flex-col transition-all">
+          <div>
+            <div class="flex flex-col sm:flex-row justify-between items-start gap-2 mb-4">
+              <div>
+                <span class="text-[10px] font-orbitron text-[#39d619] uppercase tracking-widest">Software Division</span>
+                <h3 class="font-orbitron text-xl sm:text-2xl text-white font-semibold mt-1">Web Developer / Frontend</h3>
+              </div>
+              <span class="bg-[#39d619]/10 border border-[#39d619]/30 text-[#39d619] font-orbitron text-xs px-4 py-1.5 rounded-full whitespace-nowrap">
+                ₹2,00,000 / Annum
+              </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed mb-6">
+              Build modern, responsive web applications, interactive product viewers, client authentication portals, and real-time smart device telemetry dashboards.
+            </p>
+
+            <div class="space-y-2 mb-6 text-xs text-zinc-300">
+              <div class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-[#39d619]"></iconify-icon> Strong proficiency in JavaScript, Tailwind CSS & HTML5</div>
+              <div class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-[#39d619]"></iconify-icon> Experience with REST APIs, WebSockets, or Supabase</div>
+              <div class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-[#39d619]"></iconify-icon> Passion for sleek futuristic dark UI aesthetics</div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-8">
+              <span class="text-[10px] uppercase font-orbitron bg-white/5 px-3 py-1 rounded-full text-zinc-300">Frontend / WebGL</span>
+              <span class="text-[10px] uppercase font-orbitron bg-white/5 px-3 py-1 rounded-full text-zinc-300">JavaScript / React</span>
+              <span class="text-[10px] uppercase font-orbitron bg-white/5 px-3 py-1 rounded-full text-zinc-300">Full Time</span>
+            </div>
+          </div>
+
+          <a href="#apply-section" onclick="preselectRole('Web Developer / Frontend')" data-career-role="Web Developer / Frontend" class="mt-2 w-full inline-flex items-center justify-center gap-2 text-center bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-3 rounded-full font-semibold hover:bg-white transition-all shadow-[0_0_18px_rgba(57,214,25,0.18)]">
+            Apply For This Position <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <!-- Role 3: Embedded Firmware Engineer -->
+        <div class="bg-[#080808] border border-white/10 hover:border-[#39d619]/50 rounded-3xl p-8 flex flex-col transition-all">
+          <div>
+            <div class="flex flex-col sm:flex-row justify-between items-start gap-2 mb-4">
+              <div>
+                <span class="text-[10px] font-orbitron text-[#39d619] uppercase tracking-widest">Firmware Engineering</span>
+                <h3 class="font-orbitron text-xl sm:text-2xl text-white font-semibold mt-1">Embedded Firmware Engineer</h3>
+              </div>
+              <span class="bg-[#39d619]/10 border border-[#39d619]/30 text-[#39d619] font-orbitron text-xs px-4 py-1.5 rounded-full whitespace-nowrap">
+                ₹2,00,000 / Annum
+              </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed mb-6">
+              Develop low-latency bare-metal drivers, FreeRTOS multi-threaded firmware, BLE 5.0 and Wi-Fi mesh communications for our proprietary microcontroller line and automation systems.
+            </p>
+
+            <div class="space-y-2 mb-6 text-xs text-zinc-300">
+              <div class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-[#39d619]"></iconify-icon> Fluent in embedded C/C++ and ESP-IDF / ARM GCC</div>
+              <div class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-[#39d619]"></iconify-icon> Protocols: I2C, SPI, UART, Modbus RTU, MQTT</div>
+              <div class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-[#39d619]"></iconify-icon> Familiarity with OTA updates and bootloaders</div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-8">
+              <span class="text-[10px] uppercase font-orbitron bg-white/5 px-3 py-1 rounded-full text-zinc-300">Firmware</span>
+              <span class="text-[10px] uppercase font-orbitron bg-white/5 px-3 py-1 rounded-full text-zinc-300">FreeRTOS / C++</span>
+              <span class="text-[10px] uppercase font-orbitron bg-white/5 px-3 py-1 rounded-full text-zinc-300">Full Time</span>
+            </div>
+          </div>
+
+          <a href="#apply-section" onclick="preselectRole('Embedded Firmware Engineer')" data-career-role="Embedded Firmware Engineer" class="w-full text-center bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-3 rounded-full font-semibold hover:bg-white transition-all">
+            Apply For This Position
+          </a>
+        </div>
+
+        <!-- Role 4: Robotics Intern -->
+        <div class="bg-[#080808] border border-white/10 hover:border-[#39d619]/50 rounded-3xl p-8 flex flex-col transition-all">
+          <div>
+            <div class="flex flex-col sm:flex-row justify-between items-start gap-2 mb-4">
+              <div>
+                <span class="text-[10px] font-orbitron text-[#39d619] uppercase tracking-widest">Robotics Lab</span>
+                <h3 class="font-orbitron text-xl sm:text-2xl text-white font-semibold mt-1">Robotics Hardware Intern</h3>
+              </div>
+              <span class="bg-[#39d619]/10 border border-[#39d619]/30 text-[#39d619] font-orbitron text-xs px-4 py-1.5 rounded-full whitespace-nowrap">
+                Stipend + Pre-Placement Offer
+              </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed mb-6">
+              Hands-on prototyping with CAD 3D-printing, motor driver testing, sensor integration, chassis assembly, and college project workshop execution.
+            </p>
+
+            <div class="space-y-2 mb-6 text-xs text-zinc-300">
+              <div class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-[#39d619]"></iconify-icon> Enrolled in 3rd/4th year B.Tech or Diploma</div>
+              <div class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-[#39d619]"></iconify-icon> Experience building robots or electronic projects</div>
+              <div class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear" class="text-[#39d619]"></iconify-icon> High enthusiasm to learn hardware manufacturing</div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-8">
+              <span class="text-[10px] uppercase font-orbitron bg-white/5 px-3 py-1 rounded-full text-zinc-300">Robotics</span>
+              <span class="text-[10px] uppercase font-orbitron bg-white/5 px-3 py-1 rounded-full text-zinc-300">Internship</span>
+              <span class="text-[10px] uppercase font-orbitron bg-white/5 px-3 py-1 rounded-full text-zinc-300">3-6 Months</span>
+            </div>
+          </div>
+
+          <a href="#apply-section" onclick="preselectRole('Robotics Hardware Intern')" data-career-role="Robotics Hardware Intern" class="w-full text-center bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-3 rounded-full font-semibold hover:bg-white transition-all">
+            Apply For This Position
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- APPLICATION FORM SECTION -->
+    <section id="apply-section" class="max-w-[1200px] mx-auto px-5 sm:px-8 md:px-12 py-20">
+      <div class="bg-[#080808] border border-white/15 rounded-3xl p-8 sm:p-12 md:p-16 shadow-2xl">
+        <div class="max-w-2xl mx-auto text-center mb-10">
+          <span class="text-xs font-orbitron text-[#39d619] uppercase tracking-widest block mb-2">Direct Application</span>
+          <h2 class="font-orbitron text-2xl sm:text-4xl text-white font-semibold">Submit Your Application</h2>
+          <p class="text-xs sm:text-sm text-zinc-400 font-light mt-2">
+            Send your resume and project links directly to our hiring team. We review all engineering candidates within 48 hours.
+          </p>
+        </div>
+
+        <form id="career-form" class="max-w-2xl mx-auto space-y-5" onsubmit="handleCareerSubmit(event)">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block font-orbitron text-[10px] uppercase tracking-widest text-zinc-400 mb-2">Full Name</label>
+              <input type="text" id="career-name" name="full_name" required placeholder="Your Name" class="form-input text-sm">
+            </div>
+            <div>
+              <label class="block font-orbitron text-[10px] uppercase tracking-widest text-zinc-400 mb-2">Phone Number</label>
+              <input type="tel" id="career-phone" name="phone" required placeholder="+91 xxxxxxxxxx" class="form-input text-sm">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block font-orbitron text-[10px] uppercase tracking-widest text-zinc-400 mb-2">Email Address</label>
+              <input type="email" id="career-email" name="email" required placeholder="contact@domain.com" class="form-input text-sm">
+            </div>
+            <div>
+              <label class="block font-orbitron text-[10px] uppercase tracking-widest text-zinc-400 mb-2">Position Desired</label>
+              <select id="role-select" name="role" required class="form-input text-sm">
+                <option value="Electrical Design Engineer">Electrical Design Engineer</option>
+                <option value="Web Developer / Frontend">Web Developer / Frontend</option>
+                <option value="Embedded Firmware Engineer">Embedded Firmware Engineer</option>
+                <option value="Robotics Hardware Intern">Robotics Hardware Intern</option>
+                <option value="Other / General">Other Engineering Inquiry</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-orbitron text-[10px] uppercase tracking-widest text-zinc-400 mb-2">GitHub / LinkedIn / Portfolio URL</label>
+            <input type="url" id="career-portfolio" name="portfolio_link" placeholder="https://github.com/yourhandle or linkedin.com/in/..." class="form-input text-sm">
+          </div>
+
+          <div>
+            <label class="block font-orbitron text-[10px] uppercase tracking-widest text-zinc-400 mb-2">Upload Resume / CV (PDF format, max 5 MB)</label>
+            <input type="file" id="career-resume" name="resume" accept="application/pdf,.pdf" required class="form-input text-xs text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-orbitron file:bg-[#39d619] file:text-black hover:file:bg-white cursor-pointer">
+          </div>
+
+          <div>
+            <label class="block font-orbitron text-[10px] uppercase tracking-widest text-zinc-400 mb-2">Brief Summary of Projects or Experience</label>
+            <textarea id="career-summary" name="message" rows="3" placeholder="Tell us about the hardware or web software you have built..." class="form-input text-sm resize-none"></textarea>
+          </div>
+
+          <button id="career-submit-btn" type="submit" class="w-full bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-4 rounded-full font-semibold hover:bg-white transition-all shadow-[0_0_25px_rgba(57,214,25,0.3)] cursor-pointer">
+            Submit Application
+          </button>
+          <div id="career-status-msg" class="text-center font-orbitron text-xs p-3 rounded-xl hidden"></div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-black pt-16 sm:pt-20 pb-10 px-5 sm:px-8 md:px-12 lg:px-24 relative z-20 border-t border-white/10">
+    <div class="max-w-[1400px] mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 md:gap-16 mb-12 sm:mb-16">
+        <div class="sm:col-span-2 md:col-span-2">
+          <a href="/" class="inline-flex items-center gap-2.5 sm:gap-3 mb-4 sm:mb-6 group">
+            <img src="https://res.cloudinary.com/rigthxp5/image/upload/v1789156088/7ebab95d-6451-46d6-bd66-5cd62b322319.png" alt="HV Logo" class="h-8 sm:h-9 w-auto object-contain filter drop-shadow-[0_0_8px_rgba(57,214,25,0.6)]"/>
+            <span class="font-orbitron font-bold text-white tracking-widest text-base sm:text-lg">HV VERTEX ELECTRONICS</span>
+          </a>
+          <p class="text-zinc-500 font-light text-xs sm:text-sm max-w-sm mb-4 sm:mb-6 leading-relaxed">
+            Developing, manufacturing, and supplying smart controllers, development boards, and automation solutions. Build. Connect. Automate. Simplify.
+          </p>
+          <div class="text-xs text-zinc-400 space-y-2">
+            <a href="mailto:hr@hvvertex.in" class="flex items-start gap-2 hover:text-[#39d619] transition-colors">
+              <iconify-icon icon="solar:letter-linear" class="text-[#39d619] mt-0.5 shrink-0"></iconify-icon>
+              <span>hr@hvvertex.in</span>
+            </a>
+            <div class="flex items-start gap-2">
+              <iconify-icon icon="solar:phone-calling-linear" class="text-[#39d619] mt-0.5 shrink-0"></iconify-icon>
+              <span>+91 9182503188 / +91 91827 36781</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <iconify-icon icon="solar:map-point-linear" class="text-[#39d619] mt-0.5 shrink-0"></iconify-icon>
+              <span>28-22-6, Prakasraopeta, Boddu Naidu Street, Andhra Pradesh 530020</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-orbitron font-medium text-[10px] text-zinc-500 uppercase tracking-widest mb-4 sm:mb-6">Product Portfolio</h4>
+          <ul class="space-y-2.5 sm:space-y-3 text-xs sm:text-sm font-light text-zinc-400">
+            <li><a href="/products?filter=mcu" class="hover:text-[#39d619] transition-colors">Microcontrollers & Boards</a></li>
+            <li><a href="/products?filter=hardware" class="hover:text-[#39d619] transition-colors">Precision Screws & Hardware</a></li>
+            <li><a href="/products?filter=driver" class="hover:text-[#39d619] transition-colors">Motor Drivers (20A / 60A)</a></li>
+            <li><a href="/products?filter=automation" class="hover:text-[#39d619] transition-colors">Home Automation</a></li>
+            <li><a href="/products?filter=robotics" class="hover:text-[#39d619] transition-colors">Industrial PLCs & Robotics</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-orbitron font-medium text-[10px] text-zinc-500 uppercase tracking-widest mb-4 sm:mb-6">Navigation</h4>
+          <ul class="space-y-2.5 sm:space-y-3 text-xs sm:text-sm font-light text-zinc-400">
+            <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
+            <li><a href="/products" class="hover:text-white transition-colors">Products</a></li>
+            <li><a href="/about" class="hover:text-white transition-colors">About Company</a></li>
+            <li><a href="/students" class="hover:text-white transition-colors">Student Portal</a></li>
+            <li><a href="/careers" class="text-[#39d619]">Careers</a></li>
+            <li><a href="/contact" class="hover:text-white transition-colors">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 text-center sm:text-left">
+        <p class="text-zinc-600 text-[10px] font-orbitron uppercase tracking-widest">© 2026 HV VERTEX ELECTRONICS. All rights reserved.</p>
+        <div class="flex gap-4 sm:gap-6 text-[10px] font-orbitron uppercase tracking-widest text-zinc-600">
+          <span>Best Quality</span><span>Fast Delivery</span><span>Warranty Assurance</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/api.js"></script>
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu-dropdown');
+      const icon = document.getElementById('mobile-menu-icon');
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        icon.setAttribute('icon', 'solar:close-circle-linear');
+      } else {
+        menu.classList.add('hidden');
+        icon.setAttribute('icon', 'solar:hamburger-menu-linear');
+      }
+    }
+
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      const progressBar = document.getElementById('scroll-progress');
+      if (progressBar) {
+        progressBar.style.transform = `scaleX(${scrolled / 100})`;
+      }
+
+      const navContainer = document.getElementById('global-navigation');
+      const nav = document.getElementById('main-nav');
+      if (window.scrollY > 40) {
+        navContainer.classList.add('scrolled');
+        nav.classList.add('nav-scrolled');
+      } else {
+        navContainer.classList.remove('scrolled');
+        nav.classList.remove('nav-scrolled');
+      }
+    });
+  </script>
+
+</body>
+</html>
