@@ -1,53 +1,32 @@
-// HV VERTEX - same-origin API client for Cloudflare Workers
-let csrfToken = null;
+// HV VERTEX - Web3Forms Client Handler
+const WEB3FORMS_ACCESS_KEY = "80f4eed3-0730-4406-9529-ff1f260080e4";
 
-async function fetchCsrfToken() {
-  const res = await fetch('/api/csrf', { credentials: 'same-origin', cache: 'no-store' });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok || !data.token) throw new Error('Could not initialize secure session.');
-  csrfToken = data.token;
-  return csrfToken;
-}
-
-async function ensureCsrfToken(force = false) {
-  if (!force && csrfToken) return csrfToken;
-  return fetchCsrfToken();
-}
-
-async function apiRequest(endpoint, method = 'GET', data = null) {
-  const options = { method, credentials: 'same-origin', headers: {} };
-  if (data !== null && ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)) {
-    options.headers['X-CSRF-Token'] = await ensureCsrfToken();
-    if (data instanceof FormData) {
-      options.body = data;
-    } else {
-      options.headers['Content-Type'] = 'application/json';
-      options.body = JSON.stringify(data);
-    }
+async function submitToWeb3Forms(form, formData) {
+  // Always append the Web3Forms access key
+  formData.append('access_key', WEB3FORMS_ACCESS_KEY);
+  
+  // Optional redirect back home or to success state after submission
+  if (!formData.has('redirect')) {
+    formData.append('redirect', window.location.origin);
   }
 
   try {
-    let res = await fetch(endpoint, options);
-    // Refresh once if the CSRF cookie/token pair has expired or rotated.
-    if (res.status === 403 && options.headers['X-CSRF-Token']) {
-      csrfToken = null;
-      options.headers['X-CSRF-Token'] = await ensureCsrfToken(true);
-      res = await fetch(endpoint, options);
-    }
-    const contentType = res.headers.get('content-type') || '';
-    const result = contentType.includes('application/json')
-      ? await res.json()
-      : { success: false, message: await res.text() };
-    return { ok: res.ok, status: res.status, ...result };
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    });
+    
+    const result = await response.json();
+    return {
+      ok: response.ok && result.success,
+      success: result.success,
+      message: result.message || (result.success ? 'Successfully sent!' : 'Submission failed.')
+    };
   } catch (err) {
-    console.error(`API Error on ${endpoint}:`, err);
-    return { ok: false, success: false, message: 'Could not connect to HV Vertex server.' };
+    console.error('Web3Forms Error:', err);
+    return { ok: false, success: false, message: 'Could not connect to submission server.' };
   }
 }
-
-async function apiSubmitContact(formData) { return apiRequest('/api/contact', 'POST', formData); }
-async function apiSubmitStudent(formData) { return apiRequest('/api/students', 'POST', formData); }
-async function apiSubmitCareer(formData) { return apiRequest('/api/careers', 'POST', formData); }
 
 function showFormStatus(el, ok, message) {
   if (!el) return;
@@ -73,19 +52,18 @@ function setSubmitBusy(btn, busy, idleLabel) {
 
 async function handleContactSubmit(event) {
   event.preventDefault();
+  const form = event.target;
   const btn = document.getElementById('contact-submit-btn');
   const status = document.getElementById('contact-status-msg');
-  const fullName = document.getElementById('name')?.value?.trim() || '';
-  const email = document.getElementById('email')?.value?.trim() || '';
-  const phone = document.getElementById('phone')?.value?.trim() || '';
-  const service = document.getElementById('service-select')?.value || 'General';
-  const message = document.getElementById('message')?.value?.trim() || '';
+
+  const formData = new FormData(form);
 
   setSubmitBusy(btn, true);
-  const result = await apiSubmitContact({ full_name: fullName, email, phone, service, message });
+  const result = await submitToWeb3Forms(form, formData);
   setSubmitBusy(btn, false, 'Send Inquiry Message');
-  showFormStatus(status, result.ok && result.success, result.message || (result.ok ? 'Message sent.' : 'Submission failed.'));
-  if (result.ok && result.success) event.target.reset();
+  
+  showFormStatus(status, result.ok, result.message);
+  if (result.ok) form.reset();
 }
 
 async function handleStudentSubmit(event) {
@@ -95,13 +73,7 @@ async function handleStudentSubmit(event) {
   const status = document.getElementById('student-status-msg');
   const proofInput = document.getElementById('student-proof');
   const proofFile = proofInput?.files?.[0];
-  const fullName = document.getElementById('student-name')?.value?.trim() || '';
-  const email = document.getElementById('student-email')?.value?.trim() || '';
-  const college = document.getElementById('student-college')?.value?.trim() || '';
-  const branch = document.getElementById('student-branch')?.value?.trim() || '';
-  const phone = document.getElementById('student-phone')?.value?.trim() || '';
   const hardware = document.getElementById('student-hardware')?.value?.trim() || '';
-  const project = document.getElementById('student-project')?.value?.trim() || '';
 
   if (!proofFile) return showFormStatus(status, false, 'Please upload your student ID or bonafide certificate.');
   const allowedTypes = new Set(['application/pdf', 'image/jpeg', 'image/png']);
@@ -115,22 +87,18 @@ async function handleStudentSubmit(event) {
   }
   if (!hardware) return showFormStatus(status, false, 'Please tell us which hardware or components you need.');
 
-  const formData = new FormData();
-  formData.append('full_name', fullName);
-  formData.append('email', email);
-  formData.append('phone', phone);
-  formData.append('college', college);
-  formData.append('department', branch);
-  formData.append('inquiry_type', 'Academic Discount Application');
-  formData.append('hardware_required', hardware);
-  formData.append('project_purpose', project);
-  formData.append('student_proof', proofFile, proofFile.name);
+  const formData = new FormData(form);
+  // Ensure correct field naming for Web3Forms attachment parsing
+  if (proofFile && !formData.has('attachment')) {
+    formData.append('attachment', proofFile, proofFile.name);
+  }
 
   setSubmitBusy(btn, true);
-  const result = await apiSubmitStudent(formData);
+  const result = await submitToWeb3Forms(form, formData);
   setSubmitBusy(btn, false, 'Submit for Student Discount Coupon');
-  showFormStatus(status, result.ok && result.success, result.message || (result.ok ? 'Application received.' : 'Submission failed.'));
-  if (result.ok && result.success) form.reset();
+  
+  showFormStatus(status, result.ok, result.message);
+  if (result.ok) form.reset();
 }
 
 async function handleCareerSubmit(event) {
@@ -140,7 +108,6 @@ async function handleCareerSubmit(event) {
   const status = document.getElementById('career-status-msg');
   const resumeInput = document.getElementById('career-resume');
   const resumeFile = resumeInput?.files?.[0];
-  const formData = new FormData(form);
 
   if (!resumeFile) return showFormStatus(status, false, 'Please upload your resume in PDF format.');
   if (!(resumeFile.type === 'application/pdf' || resumeFile.name.toLowerCase().endsWith('.pdf'))) {
@@ -152,11 +119,17 @@ async function handleCareerSubmit(event) {
     return showFormStatus(status, false, 'Resume file is too large. Maximum size is 5 MB.');
   }
 
+  const formData = new FormData(form);
+  if (resumeFile && !formData.has('attachment')) {
+    formData.append('attachment', resumeFile, resumeFile.name);
+  }
+
   setSubmitBusy(btn, true);
-  const result = await apiSubmitCareer(formData);
+  const result = await submitToWeb3Forms(form, formData);
   setSubmitBusy(btn, false, 'Submit Application');
-  showFormStatus(status, result.ok && result.success, result.message || (result.ok ? 'Application submitted.' : 'Submission failed.'));
-  if (result.ok && result.success) form.reset();
+  
+  showFormStatus(status, result.ok, result.message);
+  if (result.ok) form.reset();
 }
 
 function preselectRole(role) {
