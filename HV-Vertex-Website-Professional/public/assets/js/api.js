@@ -1,5 +1,5 @@
 // HV VERTEX - Web3Forms Client Handler
-const WEB3FORMS_ACCESS_KEY = "80f4eed3-0730-4406-9529-ff1f260080e4";
+const WEB3FORMS_ACCESS_KEY = "cce5df4d-f1e3-417a-aa46-dc6a871b73e7";
 
 async function submitToWeb3Forms(form, formData) {
   // Always append the Web3Forms access key
