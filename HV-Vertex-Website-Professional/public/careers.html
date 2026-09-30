@@ -122,13 +122,12 @@
   
     body, input, textarea, select, button { font-family: 'Orbitron', sans-serif; }
 
-    .career-role-grid p { text-align: left; text-justify: auto; }
+    .career-role-grid p { text-align: left; }
     .career-role-grid { align-items: start; }
     .career-role-grid > div { min-height: 0; height: auto; }
-    .career-role-grid > div h3 { min-height: 3.5rem; display:flex; align-items:flex-start; }
+    .career-role-grid > div h3 { min-height: 3.5rem; display: flex; align-items: flex-start; }
     .career-role-grid > div > div > p { min-height: 4.5rem; }
-
-</style>
+  </style>
 </head>
 
 <body class="text-zinc-300 overflow-x-hidden min-h-screen relative selection:bg-[#39d619]/30 selection:text-white bg-[#030503]">
@@ -158,8 +157,6 @@
         </div>
 
         <div class="flex items-center gap-2 flex-shrink-0">
-
-          <!-- Primary contact CTA (replaces the former account actions) -->
           <a href="/contact" class="hidden md:inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full bg-[#39d619] text-black font-orbitron text-[10px] lg:text-[11px] font-semibold uppercase tracking-[0.12em] hover:bg-white transition-all duration-300 shadow-[0_0_18px_rgba(57,214,25,0.18)]">
             Contact Us
             <iconify-icon icon="solar:arrow-right-linear" width="15"></iconify-icon>
@@ -257,7 +254,7 @@
             </div>
           </div>
 
-          <a href="#apply-section" onclick="preselectRole('Electrical Design Engineer')" data-career-role="Electrical Design Engineer" class="w-full text-center bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-3 rounded-full font-semibold hover:bg-white transition-all">
+          <a href="#apply-section" onclick="selectRole('Electrical Design Engineer')" class="w-full text-center bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-3 rounded-full font-semibold hover:bg-white transition-all">
             Apply For This Position
           </a>
         </div>
@@ -292,7 +289,7 @@
             </div>
           </div>
 
-          <a href="#apply-section" onclick="preselectRole('Web Developer / Frontend')" data-career-role="Web Developer / Frontend" class="mt-2 w-full inline-flex items-center justify-center gap-2 text-center bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-3 rounded-full font-semibold hover:bg-white transition-all shadow-[0_0_18px_rgba(57,214,25,0.18)]">
+          <a href="#apply-section" onclick="selectRole('Web Developer / Frontend')" class="mt-2 w-full inline-flex items-center justify-center gap-2 text-center bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-3 rounded-full font-semibold hover:bg-white transition-all shadow-[0_0_18px_rgba(57,214,25,0.18)]">
             Apply For This Position <span aria-hidden="true">→</span>
           </a>
         </div>
@@ -327,7 +324,7 @@
             </div>
           </div>
 
-          <a href="#apply-section" onclick="preselectRole('Embedded Firmware Engineer')" data-career-role="Embedded Firmware Engineer" class="w-full text-center bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-3 rounded-full font-semibold hover:bg-white transition-all">
+          <a href="#apply-section" onclick="selectRole('Embedded Firmware Engineer')" class="w-full text-center bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-3 rounded-full font-semibold hover:bg-white transition-all">
             Apply For This Position
           </a>
         </div>
@@ -341,7 +338,7 @@
                 <h3 class="font-orbitron text-xl sm:text-2xl text-white font-semibold mt-1">Robotics Hardware Intern</h3>
               </div>
               <span class="bg-[#39d619]/10 border border-[#39d619]/30 text-[#39d619] font-orbitron text-xs px-4 py-1.5 rounded-full whitespace-nowrap">
-                Stipend + Pre-Placement Offer
+                Stipend + PPO
               </span>
             </div>
 
@@ -362,7 +359,7 @@
             </div>
           </div>
 
-          <a href="#apply-section" onclick="preselectRole('Robotics Hardware Intern')" data-career-role="Robotics Hardware Intern" class="w-full text-center bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-3 rounded-full font-semibold hover:bg-white transition-all">
+          <a href="#apply-section" onclick="selectRole('Robotics Hardware Intern')" class="w-full text-center bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-3 rounded-full font-semibold hover:bg-white transition-all">
             Apply For This Position
           </a>
         </div>
@@ -381,7 +378,13 @@
           </p>
         </div>
 
-        <form id="career-form" class="max-w-2xl mx-auto space-y-5" onsubmit="handleCareerSubmit(event)">
+        <!-- WEB3FORMS FORM ENDPOINT -->
+        <form action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" class="max-w-2xl mx-auto space-y-5">
+          
+          <!-- Web3Forms Access Key Configuration -->
+          <input type="hidden" name="access_key" value="80f4eed3-0730-4406-9529-ff1f260080e4">
+          <input type="hidden" name="redirect" value="https://hvvertex.in">
+
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
               <label class="block font-orbitron text-[10px] uppercase tracking-widest text-zinc-400 mb-2">Full Name</label>
@@ -417,7 +420,7 @@
 
           <div>
             <label class="block font-orbitron text-[10px] uppercase tracking-widest text-zinc-400 mb-2">Upload Resume / CV (PDF format, max 5 MB)</label>
-            <input type="file" id="career-resume" name="resume" accept="application/pdf,.pdf" required class="form-input text-xs text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-orbitron file:bg-[#39d619] file:text-black hover:file:bg-white cursor-pointer">
+            <input type="file" id="career-resume" name="attachment" accept="application/pdf,.pdf" required class="form-input text-xs text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-orbitron file:bg-[#39d619] file:text-black hover:file:bg-white cursor-pointer">
           </div>
 
           <div>
@@ -428,7 +431,6 @@
           <button id="career-submit-btn" type="submit" class="w-full bg-[#39d619] text-black font-orbitron text-xs uppercase tracking-widest py-4 rounded-full font-semibold hover:bg-white transition-all shadow-[0_0_25px_rgba(57,214,25,0.3)] cursor-pointer">
             Submit Application
           </button>
-          <div id="career-status-msg" class="text-center font-orbitron text-xs p-3 rounded-xl hidden"></div>
         </form>
       </div>
     </section>
@@ -494,7 +496,6 @@
     </div>
   </footer>
 
-  <script src="/assets/js/api.js"></script>
   <script>
     function toggleMobileMenu() {
       const menu = document.getElementById('mobile-menu-dropdown');
@@ -508,6 +509,17 @@
       }
     }
 
+    function selectRole(roleName) {
+      const select = document.getElementById('role-select');
+      if (select) {
+        for (let option of select.options) {
+          if (option.value === roleName) {
+            select.value = roleName;
+            break;
+          }
+        }
+      }
+    }
 
     window.addEventListener('scroll', () => {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
