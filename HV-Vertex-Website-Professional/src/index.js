@@ -294,24 +294,28 @@ export default {
       return setSecurityHeaders(await handleApi(request, env, ctx));
     }
 
-    // 2. Handle mapped pages (like '/' to '/index.html')
-    const target = PAGE_MAP[url.pathname];
-    if (target) {
-      const assetUrl = new URL(target, request.url);
-      // FIX: Pass the URL directly instead of a cloned Request object
-      return setSecurityHeaders(await env.ASSETS.fetch(assetUrl));
-    }
+    // 2. Map the URL to the exact file path (e.g., '/' becomes '/index.html')
+    const targetPath = PAGE_MAP[url.pathname] || url.pathname;
 
-    // 3. Preserve direct access to existing static files (images, JS, etc.)
-    const assetResponse = await env.ASSETS.fetch(request);
+    // 3. Create a completely clean Request object to bypass Cloudflare header conflicts
+    const assetUrl = new URL(targetPath, request.url);
+    const cleanRequest = new Request(assetUrl);
+
+    // 4. Fetch the file directly
+    let assetResponse = await env.ASSETS.fetch(cleanRequest);
+
+    // 5. If the exact file is found, return it
     if (assetResponse.status !== 404) {
       return setSecurityHeaders(assetResponse);
     }
 
-    // 4. Handle 404 Not Found
+    // 6. If STILL not found, show your custom 404.html page
     const notFoundUrl = new URL('/404.html', request.url);
-    // FIX: Pass the URL directly here as well
-    const notFound = await env.ASSETS.fetch(notFoundUrl);
-    return setSecurityHeaders(new Response(notFound.body, { status: 404, headers: notFound.headers }));
+    const notFoundResponse = await env.ASSETS.fetch(new Request(notFoundUrl));
+    
+    return setSecurityHeaders(new Response(notFoundResponse.body, { 
+      status: 404, 
+      headers: notFoundResponse.headers 
+    }));
   },
 };
