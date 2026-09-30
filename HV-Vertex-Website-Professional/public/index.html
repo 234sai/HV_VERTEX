@@ -136,7 +136,7 @@
 
     .ecosystem-card p { text-align: left; text-justify: auto; }
 
-    /* Scroll Expansion Hero Section CSS for Video-like behavior with safe spacing from navbar */
+    /* Scroll Expansion Hero Section CSS */
     .scroll-expand-section {
       height: 250vh;
       position: relative;
@@ -163,6 +163,54 @@
       box-shadow: 0 30px 70px rgba(0,0,0,0.85);
       border: 1px solid rgba(57, 214, 25, 0.4);
       margin-top: 3rem;
+    }
+
+    /* Mobile specific layout overrides (< 1024px) */
+    @media (max-width: 1023px) {
+      .scroll-expand-section {
+        height: auto !important;
+        position: static !important;
+      }
+      .scroll-expand-sticky {
+        position: static !important;
+        height: auto !important;
+        min-height: 82vh !important;
+        padding-top: 6.5rem !important;
+        padding-bottom: 3.5rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .scroll-expand-card {
+        position: relative !important;
+        margin-top: 1.5rem !important;
+        margin-bottom: 1.5rem !important;
+        width: 300px !important;
+        height: 360px !important;
+        border-radius: 2.5rem !important;
+        order: 2 !important;
+      }
+      #hero-headings-container {
+        display: flex !important;
+        flex-direction: column !important;
+        position: static !important;
+        width: 100% !important;
+      }
+      #text-left {
+        width: 100% !important;
+        transform: none !important;
+        opacity: 1 !important;
+        order: 1 !important;
+        margin-bottom: 0.5rem !important;
+      }
+      #text-right {
+        width: 100% !important;
+        transform: none !important;
+        opacity: 1 !important;
+        order: 3 !important;
+        margin-top: 0.5rem !important;
+      }
     }
 
     /* Fixed-Dimension Product Cards */
@@ -212,7 +260,6 @@
     .ecosystem-badge { position:absolute; top:12px; left:12px; z-index:2; background:rgba(0,0,0,.9); border:1px solid rgba(57,214,25,.6); color:#39d619; padding:6px 12px; border-radius:999px; font-family:'Orbitron',sans-serif; font-size:10px; letter-spacing:.08em; box-shadow:0 4px 12px rgba(0,0,0,.35); }
     @media (max-width:767px){ .ecosystem-image{height:230px;} }
 
-
     .automate-simplify-copy {
       width: 100%;
       max-width: 20rem !important;
@@ -235,7 +282,7 @@
       text-align: right !important;
       text-align-last: right !important;
     }
-</style>
+  </style>
 </head>
 
 <body class="text-zinc-300 overflow-x-hidden min-h-screen relative selection:bg-[#39d619]/30 selection:text-white bg-[#030503]">
@@ -309,24 +356,26 @@
           </div>
         </div>
 
-        <div class="relative z-30 w-full max-w-[1700px] mx-auto px-6 flex items-center justify-between pointer-events-none">
+        <div id="hero-headings-container" class="relative z-30 w-full max-w-[1700px] mx-auto px-6 flex items-center justify-between pointer-events-none">
           
-          <div id="text-left" class="w-[32%] flex flex-col items-start transition-all duration-75 -translate-y-20">
+          <!-- LEFT HEADING (Top on mobile) -->
+          <div id="text-left" class="w-[32%] flex flex-col items-start transition-all duration-75 lg:-translate-y-20">
             <span class="text-[9px] sm:text-[10px] font-orbitron font-medium tracking-[0.18em] text-[#39d619] uppercase mb-4 block">
               HV VERTEX ELECTRONICS • FUTURE AI-POWERED PLATFORM
             </span>
             <h1 class="font-orbitron font-medium uppercase text-2xl sm:text-3xl lg:text-[3.2rem] text-white drop-shadow-2xl">
-              <span class="block mb-4">Build.</span>
+              <span class="block mb-2 lg:mb-4">Build.</span>
               <span class="block">Connect.</span>
             </h1>
           </div>
 
-          <div id="text-right" class="w-[32%] flex flex-col items-end text-right transition-all duration-75 translate-y-20">
+          <!-- RIGHT HEADING (Bottom on mobile) -->
+          <div id="text-right" class="w-[32%] flex flex-col items-end text-right transition-all duration-75 lg:translate-y-20">
             <h1 class="font-orbitron font-medium uppercase text-2xl sm:text-3xl lg:text-[3.2rem] text-[#39d619] drop-shadow-2xl mb-4">
-              <span class="block mb-4">Automate.</span>
+              <span class="block mb-2 lg:mb-4">Automate.</span>
               <span class="block">Simplify.</span>
             </h1>
-            <p class="text-xs sm:text-sm text-zinc-300 font-light max-w-xs leading-relaxed automate-simplify-copy text-right">
+            <p class="hidden lg:block text-xs sm:text-sm text-zinc-300 font-light max-w-xs leading-relaxed automate-simplify-copy text-right">
               Transforming conventional environments through intelligent automation, custom microcontrollers, IoT devices, and robotics.
             </p>
           </div>
@@ -641,8 +690,8 @@
                 <span class="text-[10px] uppercase font-orbitron bg-white/5 px-3 py-1 rounded-full text-zinc-300">JavaScript / React</span>
                 <span class="text-[10px] uppercase font-orbitron bg-white/5 px-3 py-1 rounded-full text-zinc-300">Full Time</span>
               </div>
-              <a href="/contact?subject=Web%20Developer%20%2F%20Frontend" class="inline-flex items-center justify-center gap-2 self-start mt-2 px-5 py-2.5 rounded-full border border-[#39d619] text-[#39d619] hover:bg-[#39d619] hover:text-black text-[10px] sm:text-xs font-orbitron uppercase tracking-wider transition-all duration-300 shadow-[0_0_14px_rgba(57,214,25,0.15)] hover:shadow-[0_0_22px_rgba(57,214,25,0.35)]">Apply For Role <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
             </div>
+            <a href="/contact?subject=Web%20Developer%20%2F%20Frontend" class="inline-flex items-center justify-center gap-2 self-start mt-2 px-5 py-2.5 rounded-full border border-[#39d619] text-[#39d619] hover:bg-[#39d619] hover:text-black text-[10px] sm:text-xs font-orbitron uppercase tracking-wider transition-all duration-300 shadow-[0_0_14px_rgba(57,214,25,0.15)] hover:shadow-[0_0_22px_rgba(57,214,25,0.35)]">Apply For Role <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
           </div>
         </div>
 
@@ -750,7 +799,7 @@
       </div>
 
       <div class="border-t border-white/10 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 text-center sm:text-left">
-        <p class="text-zinc-600 text-[10px] font-orbitron uppercase tracking-widest">©️ 2026 HV VERTEX ELECTRONICS. All rights reserved.</p>
+        <p class="text-zinc-600 text-[10px] font-orbitron uppercase tracking-widest">© 2026 HV VERTEX ELECTRONICS. All rights reserved.</p>
         <div class="flex gap-4 sm:gap-6 text-[10px] font-orbitron uppercase tracking-widest text-zinc-600">
           <span>Best Quality</span><span>Fast Delivery</span><span>Warranty Assurance</span>
         </div>
@@ -765,6 +814,9 @@
     const textRight = document.getElementById('text-right');
 
     window.addEventListener('scroll', () => {
+      // Execute the scroll-expansion animations only on screens >= 1024px (Laptop/Desktop)
+      if (window.innerWidth < 1024) return;
+
       const rect = scrollSection.getBoundingClientRect();
       const scrollableHeight = scrollSection.offsetHeight - window.innerHeight;
       const currentScroll = -rect.top;
@@ -785,6 +837,18 @@
 
         textRight.style.transform = `translateY(5rem) translateX(${progress * 320}px)`;
         textRight.style.opacity = `${1 - progress * 1.5}`;
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 1024) {
+        expandCard.style.width = '';
+        expandCard.style.height = '';
+        expandCard.style.borderRadius = '';
+        textLeft.style.transform = '';
+        textLeft.style.opacity = '';
+        textRight.style.transform = '';
+        textRight.style.opacity = '';
       }
     });
   </script>
