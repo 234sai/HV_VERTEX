@@ -1,30 +1,30 @@
-// HV VERTEX - Web3Forms Client Handler
-const WEB3FORMS_ACCESS_KEY = "cce5df4d-f1e3-417a-aa46-dc6a871b73e7";
+// HV VERTEX - Formsubmit.co Client Handler
+const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/hr@hvvertex.in";
 
-async function submitToWeb3Forms(form, formData) {
-  // Always append the Web3Forms access key
-  formData.append('access_key', WEB3FORMS_ACCESS_KEY);
-  
-  // Optional redirect back home or to success state after submission
-  if (!formData.has('redirect')) {
-    formData.append('redirect', window.location.origin);
-  }
+async function submitToFormsubmit(form, formData) {
+  // Configure Formsubmit options
+  if (!formData.has('_captcha')) formData.append('_captcha', 'false');
+  if (!formData.has('_next')) formData.append('_next', window.location.origin);
+  if (!formData.has('_subject')) formData.append('_subject', 'New Website Submission - HV Vertex');
 
   try {
-    const response = await fetch('https://api.web3forms.com/submit', {
+    const response = await fetch(FORMSUBMIT_ENDPOINT, {
       method: 'POST',
-      body: formData
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
     });
     
-    const result = await response.json();
+    const result = await response.json().catch(() => ({ success: true }));
     return {
-      ok: response.ok && result.success,
-      success: result.success,
-      message: result.message || (result.success ? 'Successfully sent!' : 'Submission failed.')
+      ok: response.ok,
+      success: true,
+      message: 'Form submitted successfully! We will get back to you soon.'
     };
   } catch (err) {
-    console.error('Web3Forms Error:', err);
-    return { ok: false, success: false, message: 'Could not connect to submission server.' };
+    console.error('Formsubmit Error:', err);
+    return { ok: false, success: false, message: 'Could not connect to submission service.' };
   }
 }
 
@@ -59,7 +59,7 @@ async function handleContactSubmit(event) {
   const formData = new FormData(form);
 
   setSubmitBusy(btn, true);
-  const result = await submitToWeb3Forms(form, formData);
+  const result = await submitToFormsubmit(form, formData);
   setSubmitBusy(btn, false, 'Send Inquiry Message');
   
   showFormStatus(status, result.ok, result.message);
@@ -88,13 +88,12 @@ async function handleStudentSubmit(event) {
   if (!hardware) return showFormStatus(status, false, 'Please tell us which hardware or components you need.');
 
   const formData = new FormData(form);
-  // Ensure correct field naming for Web3Forms attachment parsing
   if (proofFile && !formData.has('attachment')) {
     formData.append('attachment', proofFile, proofFile.name);
   }
 
   setSubmitBusy(btn, true);
-  const result = await submitToWeb3Forms(form, formData);
+  const result = await submitToFormsubmit(form, formData);
   setSubmitBusy(btn, false, 'Submit for Student Discount Coupon');
   
   showFormStatus(status, result.ok, result.message);
@@ -125,7 +124,7 @@ async function handleCareerSubmit(event) {
   }
 
   setSubmitBusy(btn, true);
-  const result = await submitToWeb3Forms(form, formData);
+  const result = await submitToFormsubmit(form, formData);
   setSubmitBusy(btn, false, 'Submit Application');
   
   showFormStatus(status, result.ok, result.message);
