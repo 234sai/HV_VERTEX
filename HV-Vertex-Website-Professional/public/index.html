@@ -201,7 +201,6 @@
 
     .ecosystem-card { display:flex; flex-direction:column; height:100%; transition: all 0.4s cubic-bezier(0.16,1,0.3,1); }
     .ecosystem-card:hover { transform: translateY(-6px); border-color: rgba(57,214,25,0.6); box-shadow: 0 18px 40px -14px rgba(57,214,25,0.28); background: rgba(10,15,10,0.96); }
-    /* Keep compact card copy readable while retaining justified body text everywhere else. */
     .ecosystem-card p { text-align:left; text-justify:auto; }
     .ecosystem-card .ecosystem-copy { display:flex; flex-direction:column; flex:1 1 auto; min-height:190px; }
     .ecosystem-card .ecosystem-copy h3 { min-height:3.5rem; display:flex; align-items:flex-start; }
@@ -228,12 +227,10 @@
       width: 100%;
       text-align: right !important;
     }
-    /* Keep the entire first/home hero section in its original alignment. */
     .scroll-expand-section p {
       text-align: left !important;
       text-align-last: left !important;
     }
-    /* Right-align only the AUTOMATE / SIMPLIFY paragraph */
     .scroll-expand-section #text-right p.automate-simplify-copy {
       text-align: right !important;
       text-align-last: right !important;
@@ -269,8 +266,6 @@
         </div>
 
         <div class="flex items-center gap-2 flex-shrink-0">
-
-          <!-- Primary contact CTA (replaces the former account actions) -->
           <a href="/contact" class="hidden md:inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full bg-[#39d619] text-black font-orbitron text-[10px] lg:text-[11px] font-semibold uppercase tracking-[0.12em] hover:bg-white transition-all duration-300 shadow-[0_0_18px_rgba(57,214,25,0.18)]">
             Contact Us
             <iconify-icon icon="solar:arrow-right-linear" width="15"></iconify-icon>
@@ -303,7 +298,6 @@
     <div id="home" class="scroll-expand-section hero-mix-bg">
       <div class="scroll-expand-sticky">
         
-        <!-- Expanding Card carrying your updated Cloudinary image -->
         <div id="expand-card" class="scroll-expand-card w-[300px] sm:w-[360px] h-[360px] sm:h-[420px] rounded-[2.5rem]">
           <img src="https://res.cloudinary.com/rigthxp5/image/upload/v1789240207/ChatGPT_Image_Sep_13_2026_12_39_47_AM.png" alt="Showcase" class="w-full h-full object-cover">
           <div class="absolute inset-0 bg-black/30"></div>
@@ -315,10 +309,8 @@
           </div>
         </div>
 
-        <!-- Foreground website text with proper line spacing (block elements with generous vertical gaps) -->
         <div class="relative z-30 w-full max-w-[1700px] mx-auto px-6 flex items-center justify-between pointer-events-none">
           
-          <!-- Left side text with structured line spacing -->
           <div id="text-left" class="w-[32%] flex flex-col items-start transition-all duration-75 -translate-y-20">
             <span class="text-[9px] sm:text-[10px] font-orbitron font-medium tracking-[0.18em] text-[#39d619] uppercase mb-4 block">
               HV VERTEX ELECTRONICS • FUTURE AI-POWERED PLATFORM
@@ -329,7 +321,6 @@
             </h1>
           </div>
 
-          <!-- Right side text with structured line spacing -->
           <div id="text-right" class="w-[32%] flex flex-col items-end text-right transition-all duration-75 translate-y-20">
             <h1 class="font-orbitron font-medium uppercase text-2xl sm:text-3xl lg:text-[3.2rem] text-[#39d619] drop-shadow-2xl mb-4">
               <span class="block mb-4">Automate.</span>
@@ -388,7 +379,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           <a href="/products" class="ecosystem-card group bg-[#080808] border border-white/15 rounded-[2rem] p-4 sm:p-5 overflow-hidden reveal-on-scroll h-full">
-            <div class="ecosystem-image"><span class="ecosystem-badge">◉ &nbsp; MICROCONTROLLERS</span><img src="/assets/images/MICROCONTROLLER.png" alt="Microcontrollers" class="w-full h-full object-contain"></div>
+            <div class="ecosystem-image"><span class="ecosystem-badge">◉ &nbsp; MICROCONTROLLERS</span><img src="/MICROCONTROLLER.png" alt="Microcontrollers" class="w-full h-full object-contain"></div>
             <div class="ecosystem-copy pt-5 px-1 pb-2">
               <h3 class="font-orbitron text-xl sm:text-2xl text-[#39d619] uppercase leading-tight mb-3">Microcontrollers</h3>
               <p class="text-sm text-zinc-300 leading-6">Compact & large processors, Bluetooth and non-Bluetooth variants, plus our branded development boards.</p>
@@ -397,7 +388,7 @@
           </a>
 
           <a href="/products" class="ecosystem-card group bg-[#080808] border border-white/15 rounded-[2rem] p-4 sm:p-5 overflow-hidden reveal-on-scroll h-full" style="--reveal-delay:100ms">
-            <div class="ecosystem-image"><span class="ecosystem-badge">⚙ &nbsp; PRECISION HARDWARE</span><img src="/assets/images/FASTENERS_AND_HARDWARE.jpg" alt="Precision screws and hardware" class="w-full h-full object-contain"></div>
+            <div class="ecosystem-image"><span class="ecosystem-badge">⚙ &nbsp; PRECISION HARDWARE</span><img src="/FASTENERS_AND_HARDWARE.jpg" alt="Precision screws and hardware" class="w-full h-full object-contain"></div>
             <div class="ecosystem-copy pt-5 px-1 pb-2">
               <h3 class="font-orbitron text-xl sm:text-2xl text-[#39d619] uppercase leading-tight mb-3">Precision Screws &amp; Hardware</h3>
               <p class="text-sm text-zinc-300 leading-6">M2, M3, and M4 hex screws, nylon standoffs, nuts, and bolts engineered specifically for electronic assemblies.</p>
@@ -406,7 +397,7 @@
           </a>
 
           <a href="/products" class="ecosystem-card group bg-[#080808] border border-white/15 rounded-[2rem] p-4 sm:p-5 overflow-hidden reveal-on-scroll h-full" style="--reveal-delay:200ms">
-            <div class="ecosystem-image"><span class="ecosystem-badge">▣ &nbsp; HOME AUTOMATION</span><img src="/assets/images/HOME_AUTOMATION.jpg" alt="Home automation" class="w-full h-full object-contain"></div>
+            <div class="ecosystem-image"><span class="ecosystem-badge">▣ &nbsp; HOME AUTOMATION</span><img src="/HOME_AUTOMATION.jpg" alt="Home automation" class="w-full h-full object-contain"></div>
             <div class="ecosystem-copy pt-5 px-1 pb-2">
               <h3 class="font-orbitron text-xl sm:text-2xl text-[#39d619] uppercase leading-tight mb-3">Home Automation</h3>
               <p class="text-sm text-zinc-300 leading-6">Smart modules for AC, automated temperature-based fans, smart lights, and retrofit switches.</p>
@@ -415,7 +406,7 @@
           </a>
 
           <a href="/products" class="ecosystem-card group bg-[#080808] border border-white/15 rounded-[2rem] p-4 sm:p-5 overflow-hidden hidden reveal-on-scroll h-full" style="--reveal-delay:100ms">
-            <div class="ecosystem-image"><span class="ecosystem-badge">◉ &nbsp; MOTOR DRIVERS</span><img src="/assets/images/MOTOR_DRIVERS.jpg" alt="Motor drivers" class="w-full h-full object-contain"></div>
+            <div class="ecosystem-image"><span class="ecosystem-badge">◉ &nbsp; MOTOR DRIVERS</span><img src="/MOTOR_DRIVERS.jpg" alt="Motor drivers" class="w-full h-full object-contain"></div>
             <div class="ecosystem-copy pt-5 px-1 pb-2">
               <h3 class="font-orbitron text-xl sm:text-2xl text-[#39d619] uppercase leading-tight mb-3">Motor Drivers</h3>
               <p class="text-sm text-zinc-300 leading-6">High-performance DC and BLDC motor drivers available in robust 20A and 60A configurations for robotics.</p>
@@ -424,7 +415,7 @@
           </a>
 
           <a href="/products" class="ecosystem-card group bg-[#080808] border border-white/15 rounded-[2rem] p-4 sm:p-5 overflow-hidden hidden reveal-on-scroll h-full" style="--reveal-delay:200ms">
-            <div class="ecosystem-image"><span class="ecosystem-badge">▤ &nbsp; INDUSTRIAL PLCs</span><img src="/assets/images/INDUSTRAIL_PLCS.jpeg" alt="Industrial PLCs" class="w-full h-full object-contain"></div>
+            <div class="ecosystem-image"><span class="ecosystem-badge">▤ &nbsp; INDUSTRIAL PLCs</span><img src="/INDUSTRAIL_PLCS.jpeg" alt="Industrial PLCs" class="w-full h-full object-contain"></div>
             <div class="ecosystem-copy pt-5 px-1 pb-2">
               <h3 class="font-orbitron text-xl sm:text-2xl text-[#39d619] uppercase leading-tight mb-3">Industrial PLCs</h3>
               <p class="text-sm text-zinc-300 leading-6">Compact Programmable Logic Controllers built for small-scale industrial automation and motor control.</p>
@@ -433,7 +424,7 @@
           </a>
 
           <a href="/products" class="ecosystem-card group bg-[#080808] border border-white/15 rounded-[2rem] p-4 sm:p-5 overflow-hidden hidden reveal-on-scroll h-full" style="--reveal-delay:300ms">
-            <div class="ecosystem-image"><span class="ecosystem-badge">◉ &nbsp; ROBOTICS HARDWARE</span><img src="/assets/images/ROBOTIC_HARDWARE.jpg" alt="Robotics hardware" class="w-full h-full object-contain"></div>
+            <div class="ecosystem-image"><span class="ecosystem-badge">◉ &nbsp; ROBOTICS HARDWARE</span><img src="/ROBOTIC_HARDWARE.jpg" alt="Robotics hardware" class="w-full h-full object-contain"></div>
             <div class="ecosystem-copy pt-5 px-1 pb-2">
               <h3 class="font-orbitron text-xl sm:text-2xl text-[#39d619] uppercase leading-tight mb-3">Robotics Hardware</h3>
               <p class="text-sm text-zinc-300 leading-6">Chassis, sensors, controller units, and autonomous robotic modules for engineers and hobbyists.</p>
@@ -442,7 +433,7 @@
           </a>
 
           <a href="/products" class="ecosystem-card group bg-[#080808] border border-white/15 rounded-[2rem] p-4 sm:p-5 overflow-hidden hidden reveal-on-scroll lg:col-start-2" style="--reveal-delay:200ms">
-            <div class="ecosystem-image"><span class="ecosystem-badge">⌁ &nbsp; CUSTOM SYSTEMS</span><img src="/assets/images/CUSTOM_ENGINEERING.jpeg" alt="Custom systems" class="w-full h-full object-contain"></div>
+            <div class="ecosystem-image"><span class="ecosystem-badge">⌁ &nbsp; CUSTOM SYSTEMS</span><img src="/CUSTOM_ENGINEERING.jpeg" alt="Custom systems" class="w-full h-full object-contain"></div>
             <div class="ecosystem-copy pt-5 px-1 pb-2">
               <h3 class="font-orbitron text-xl sm:text-2xl text-[#39d619] uppercase leading-tight mb-3">Custom Systems</h3>
               <p class="text-sm text-zinc-300 leading-6">Tailored microcontrollers, motor drivers, firmware, and bespoke electronic solutions based on exact specs.</p>
@@ -450,9 +441,7 @@
             </div>
           </a>
         </div>
-      </div>
 
-        <!-- View All Products -->
         <div class="mt-14 flex justify-center reveal-on-scroll">
           <a href="/products" class="inline-flex items-center gap-3 font-orbitron text-xs sm:text-sm font-semibold uppercase tracking-[0.15em] bg-transparent border-2 border-[#39d619] text-[#39d619] hover:bg-[#39d619] hover:text-black px-8 sm:px-10 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_25px_rgba(57,214,25,0.25)] hover:shadow-[0_0_35px_rgba(57,214,25,0.6)] cursor-pointer">
             <span>View All Products</span>
@@ -462,7 +451,7 @@
       </div>
     </section>
 
-    <!-- 4. ABOUT US (UNIFIED SECTION) -->
+    <!-- 4. ABOUT US -->
     <section id="about" class="relative py-20 sm:py-28 bg-[#080808] z-20 overflow-hidden border-t border-white/10">
       <div class="max-w-[1200px] mx-auto px-5 sm:px-8 md:px-12 relative z-10">
         <div class="reveal-on-scroll text-center max-w-3xl mx-auto mb-12 sm:mb-16">
@@ -509,7 +498,6 @@
           </div>
         </div>
 
-        <!-- View More About Us Button -->
         <div class="mt-14 flex justify-center reveal-on-scroll">
           <a href="/about" class="inline-flex items-center gap-3 font-orbitron text-xs sm:text-sm font-semibold uppercase tracking-[0.15em] bg-transparent border-2 border-[#39d619] text-[#39d619] hover:bg-[#39d619] hover:text-black px-8 sm:px-10 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_25px_rgba(57,214,25,0.25)] hover:shadow-[0_0_35px_rgba(57,214,25,0.6)] cursor-pointer">
             <span>View More About Us</span>
@@ -570,7 +558,6 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 relative">
-          <!-- Step 01 -->
           <div class="relative z-10 reveal-on-scroll text-center group cursor-pointer">
             <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-[#080808] border border-white/10 flex items-center justify-center mb-4 sm:mb-6 group-hover:border-[#39d619] group-hover:neon-glow transition-all duration-300">
               <span class="font-orbitron font-medium text-xl sm:text-2xl text-white group-hover:text-[#39d619] transition-colors duration-300">01</span>
@@ -579,7 +566,6 @@
             <p class="text-xs font-light text-zinc-300">Pinpoint daily inefficiencies: manual switching, wasted energy, or unconnected hardware.</p>
           </div>
 
-          <!-- Step 02 -->
           <div class="relative z-10 reveal-on-scroll text-center group cursor-pointer" style="--reveal-delay: 100ms">
             <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-[#080808] border border-white/10 flex items-center justify-center mb-4 sm:mb-6 group-hover:border-[#39d619] group-hover:neon-glow transition-all duration-300">
               <span class="font-orbitron font-medium text-xl sm:text-2xl text-white group-hover:text-[#39d619] transition-colors duration-300">02</span>
@@ -588,7 +574,6 @@
             <p class="text-xs font-light text-zinc-200">Engineer custom microcontrollers, motor drivers, and sensor arrays tailored to solve the problem.</p>
           </div>
 
-          <!-- Step 03 -->
           <div class="relative z-10 reveal-on-scroll text-center group cursor-pointer" style="--reveal-delay: 200ms">
             <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-[#080808] border border-white/10 flex items-center justify-center mb-4 sm:mb-6 group-hover:border-[#39d619] group-hover:neon-glow transition-all duration-300">
               <span class="font-orbitron font-medium text-xl sm:text-2xl text-white group-hover:text-[#39d619] transition-colors duration-300">03</span>
@@ -597,7 +582,6 @@
             <p class="font-light text-xs text-zinc-200">Integrate with our wireless connectivity (Wi-Fi/Bluetooth).</p>
           </div>
 
-          <!-- Step 04 -->
           <div class="relative z-10 reveal-on-scroll text-center group cursor-pointer" style="--reveal-delay: 300ms">
             <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-[#080808] border border-white/10 flex items-center justify-center mb-4 sm:mb-6 group-hover:border-[#39d619] group-hover:neon-glow transition-all duration-300">
               <span class="font-orbitron font-medium text-xl sm:text-2xl text-white group-hover:text-[#39d619] transition-colors duration-300">04</span>
@@ -662,7 +646,6 @@
           </div>
         </div>
 
-        <!-- View More Careers Button -->
         <div class="mt-14 flex justify-center reveal-on-scroll">
           <a href="/careers" class="inline-flex items-center gap-3 font-orbitron text-xs sm:text-sm font-semibold uppercase tracking-[0.15em] bg-transparent border-2 border-[#39d619] text-[#39d619] hover:bg-[#39d619] hover:text-black px-8 sm:px-10 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_25px_rgba(57,214,25,0.25)] hover:shadow-[0_0_35px_rgba(57,214,25,0.6)] cursor-pointer">
             <span>View All Career Openings & Roles</span>
@@ -775,7 +758,6 @@
     </div>
   </footer>
 
-  <!-- Scroll Expansion Hero Script with correct line-spaced text animation -->
   <script>
     const scrollSection = document.getElementById('home');
     const expandCard = document.getElementById('expand-card');
@@ -790,7 +772,6 @@
       if (currentScroll >= 0 && currentScroll <= scrollableHeight) {
         const progress = Math.min(Math.max(currentScroll / scrollableHeight, 0), 1);
 
-        // Smooth expansion from card dimensions to full screen width/height
         const currentWidth = 360 + progress * (window.innerWidth - 60);
         const currentHeight = 420 + progress * (window.innerHeight - 60);
         const borderRadius = 40 - progress * 40;
@@ -799,7 +780,6 @@
         expandCard.style.height = `${currentHeight}px`;
         expandCard.style.borderRadius = `${Math.max(borderRadius, 0)}px`;
 
-        // Split text sliding apart cleanly
         textLeft.style.transform = `translateY(-5rem) translateX(-${progress * 320}px)`;
         textLeft.style.opacity = `${1 - progress * 1.5}`;
 
@@ -811,7 +791,6 @@
 
   <script src="/assets/js/api.js"></script>
   <script>
-    // Force browser to always open at top (#home)
     if (history.scrollRestoration) {
       history.scrollRestoration = 'manual';
     }
@@ -831,7 +810,6 @@
         icon.setAttribute('icon', 'solar:hamburger-menu-linear');
       }
     }
-
 
     window.addEventListener('scroll', () => {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
