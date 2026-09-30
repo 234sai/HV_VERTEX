@@ -288,20 +288,30 @@ async function handleApi(request, env, ctx) {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    if (url.pathname.startsWith('/api/')) return setSecurityHeaders(await handleApi(request, env, ctx));
+    
+    // 1. Handle API routes
+    if (url.pathname.startsWith('/api/')) {
+      return setSecurityHeaders(await handleApi(request, env, ctx));
+    }
 
+    // 2. Handle mapped pages (like '/' to '/index.html')
     const target = PAGE_MAP[url.pathname];
     if (target) {
       const assetUrl = new URL(target, request.url);
-      const assetRequest = new Request(assetUrl.toString(), request);
-      return setSecurityHeaders(await env.ASSETS.fetch(assetRequest));
+      // FIX: Pass the URL directly instead of a cloned Request object
+      return setSecurityHeaders(await env.ASSETS.fetch(assetUrl));
     }
 
-    // Preserve direct access to existing static files (images, JS, etc.).
+    // 3. Preserve direct access to existing static files (images, JS, etc.)
     const assetResponse = await env.ASSETS.fetch(request);
-    if (assetResponse.status !== 404) return setSecurityHeaders(assetResponse);
+    if (assetResponse.status !== 404) {
+      return setSecurityHeaders(assetResponse);
+    }
 
-    const notFound = await env.ASSETS.fetch(new Request(new URL('/404.html', request.url), request));
+    // 4. Handle 404 Not Found
+    const notFoundUrl = new URL('/404.html', request.url);
+    // FIX: Pass the URL directly here as well
+    const notFound = await env.ASSETS.fetch(notFoundUrl);
     return setSecurityHeaders(new Response(notFound.body, { status: 404, headers: notFound.headers }));
   },
 };
