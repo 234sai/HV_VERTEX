@@ -3,6 +3,9 @@
   "name": "hv-vertex",
   "main": "./src/index.js",
   "compatibility_date": "2026-09-30",
+  "assets": {
+    "directory": "./public"
+  },
   "send_email": [
     {
       "name": "EMAIL",
