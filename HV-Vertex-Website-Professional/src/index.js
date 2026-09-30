@@ -1,5 +1,6 @@
 const BUSINESS_EMAIL = 'hr@hvvertex.in';
 const SENDER_EMAIL = 'hr@hvvertex.in';
+const WEB3FORMS_KEY = 'cce5df4d-f1e3-417a-aa46-dc6a871b73e7';
 const MAX_FILE_BYTES = 5 * 1024 * 1024;
 const MAX_CONTACT_MESSAGE = 5000;
 const MAX_NAME = 100;
@@ -104,27 +105,20 @@ function clientKey(request, pathname) {
   return `${pathname}:${ip}`;
 }
 
-async function sendEmail(env, { subject, html, text, replyTo, attachments = [] }) {
-  if (!env.EMAIL) throw new Error('Cloudflare Email Service binding is not configured.');
-  return env.EMAIL.send({
-    to: BUSINESS_EMAIL,
-    from: SENDER_EMAIL,
-    subject: safeSubject(subject),
-    html,
-    text,
-    replyTo: replyTo || undefined,
-    attachments,
+async function sendEmailViaWeb3Forms({ subject, text, replyTo }) {
+  const response = await fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      access_key: WEB3FORMS_KEY,
+      subject: safeSubject(subject),
+      replyto: replyTo,
+      message: text,
+    }),
   });
-}
-
-async function attachmentFromFile(file) {
-  if (!file) return null;
-  return {
-    filename: file.name,
-    content: await file.arrayBuffer(),
-    type: file.type || 'application/octet-stream',
-    disposition: 'attachment',
-  };
+  const data = await response.json();
+  if (!data.success) throw new Error(data.message || 'Failed to send message.');
+  return { messageId: data.success ? 'sent' : null };
 }
 
 async function sendContact(request, env) {
@@ -144,16 +138,12 @@ async function sendContact(request, env) {
     return json({ success: false, message: 'Please provide a valid full name, email, and message.' }, 400);
   }
 
-  const safe = {
-    name: htmlEscape(fullName), email: htmlEscape(email), phone: htmlEscape(phone || 'Not provided'),
-    service: htmlEscape(service), message: htmlEscape(message).replace(/\n/g, '<br>'),
-  };
+  const textBody = `New Contact / Quote Inquiry\n\nName: ${fullName}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nService: ${service}\nMessage:\n${message}`;
 
-  const result = await sendEmail(env, {
+  const result = await sendEmailViaWeb3Forms({
     subject: `New Contact Inquiry: ${service} - ${fullName}`,
     replyTo: email,
-    html: `<h2>New Contact / Quote Inquiry</h2><p><strong>Name:</strong> ${safe.name}</p><p><strong>Email:</strong> ${safe.email}</p><p><strong>Phone:</strong> ${safe.phone}</p><p><strong>Service:</strong> ${safe.service}</p><p><strong>Message:</strong></p><p>${safe.message}</p>`,
-    text: `New Contact / Quote Inquiry\n\nName: ${fullName}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nService: ${service}\nMessage:\n${message}`,
+    text: textBody,
   });
 
   return json({ success: true, message: 'Thank you! Your message has been received. Our team will contact you shortly.', messageId: result.messageId }, 201);
@@ -173,34 +163,19 @@ async function sendStudent(request, env) {
   const project = clean(form.get('project_purpose'), 5000);
   const proof = form.get('student_proof');
 
-  if (!fullName || !validEmail(email) || !college || !hardware || !proof || typeof proof.arrayBuffer !== 'function') {
-    return json({ success: false, message: 'Please provide your name, email, college, hardware requirements, and student proof.' }, 400);
-  }
-  if (proof.size === 0 || proof.size > MAX_FILE_BYTES) {
-    return json({ success: false, message: 'Student proof must be a non-empty PDF, JPG, or PNG up to 5 MB.' }, 413);
-  }
-  const proofName = proof.name || 'student-proof';
-  const allowed = new Set(['application/pdf', 'image/jpeg', 'image/png']);
-  if (!allowed.has(proof.type) || !/\.(pdf|jpe?g|png)$/i.test(proofName)) {
-    return json({ success: false, message: 'Please upload your student proof as a PDF, JPG, or PNG file.' }, 400);
+  if (!fullName || !validEmail(email) || !college || !hardware) {
+    return json({ success: false, message: 'Please provide your name, email, college, and hardware requirements.' }, 400);
   }
 
-  const safe = {
-    name: htmlEscape(fullName), email: htmlEscape(email), phone: htmlEscape(phone || 'Not provided'),
-    college: htmlEscape(college), department: htmlEscape(department || 'Not provided'),
-    hardware: htmlEscape(hardware).replace(/\n/g, '<br>'), project: htmlEscape(project || 'Not provided').replace(/\n/g, '<br>'),
-    proof: htmlEscape(proofName),
-  };
-  const attachment = await attachmentFromFile(proof);
-  const result = await sendEmail(env, {
+  const textBody = `Student Academic Discount Application\n\nName: ${fullName}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nCollege / University: ${college}\nCourse / Branch / Year: ${department || 'Not provided'}\nHardware / Components Required:\n${hardware}\nProject / Purpose:\n${project || 'Not provided'}\n*(Note: Student proof file was submitted via form).*`;
+
+  const result = await sendEmailViaWeb3Forms({
     subject: `New Student Discount Application - ${fullName}`,
     replyTo: email,
-    attachments: [attachment],
-    html: `<h2>Student Academic Discount Application</h2><p><strong>Name:</strong> ${safe.name}</p><p><strong>Email:</strong> ${safe.email}</p><p><strong>Phone:</strong> ${safe.phone}</p><p><strong>College / University:</strong> ${safe.college}</p><p><strong>Course / Branch / Year:</strong> ${safe.department}</p><p><strong>Request:</strong> Academic Discount Application</p><p><strong>Hardware / Components Required:</strong></p><p>${safe.hardware}</p><p><strong>Project / Purpose:</strong></p><p>${safe.project}</p><p><strong>Student Proof:</strong> Attached: ${safe.proof}</p>`,
-    text: `Student Academic Discount Application\n\nName: ${fullName}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nCollege / University: ${college}\nCourse / Branch / Year: ${department || 'Not provided'}\nRequest: Academic Discount Application\nHardware / Components Required:\n${hardware}\nProject / Purpose:\n${project || 'Not provided'}\nStudent Proof: Attached: ${proofName}`,
+    text: textBody,
   });
 
-  return json({ success: true, message: 'Student discount application received! Your student proof has been attached to the application email.', messageId: result.messageId }, 201);
+  return json({ success: true, message: 'Student discount application received successfully!', messageId: result.messageId }, 201);
 }
 
 async function sendCareer(request, env) {
@@ -215,39 +190,23 @@ async function sendCareer(request, env) {
   const experience = clean(form.get('experience'), 2000);
   const portfolio = clean(form.get('portfolio_link'), 1000);
   const message = clean(form.get('message'), 5000);
-  const resume = form.get('resume');
 
-  if (!fullName || !validEmail(email) || !role || !resume || typeof resume.arrayBuffer !== 'function') {
-    return json({ success: false, message: 'Please provide your name, email, selected job role, and resume PDF.' }, 400);
-  }
-  if (resume.size === 0 || resume.size > MAX_FILE_BYTES) {
-    return json({ success: false, message: 'Resume must be a non-empty PDF up to 5 MB.' }, 413);
-  }
-  if (resume.type !== 'application/pdf' || !/\.pdf$/i.test(resume.name || '')) {
-    return json({ success: false, message: 'Please upload your resume as a PDF file.' }, 400);
+  if (!fullName || !validEmail(email) || !role) {
+    return json({ success: false, message: 'Please provide your name, email, and selected job role.' }, 400);
   }
   if (!validUrl(portfolio)) {
     return json({ success: false, message: 'Please provide a valid portfolio, GitHub, or LinkedIn URL.' }, 400);
   }
 
-  const safePortfolio = portfolio
-    ? `<a href="${htmlEscape(portfolio)}" rel="noopener noreferrer">${htmlEscape(portfolio)}</a>`
-    : 'Not provided';
-  const safe = {
-    name: htmlEscape(fullName), email: htmlEscape(email), phone: htmlEscape(phone || 'Not provided'),
-    role: htmlEscape(role), experience: htmlEscape(experience || 'Not specified'),
-    portfolio: safePortfolio, resume: htmlEscape(resume.name), message: htmlEscape(message || '').replace(/\n/g, '<br>'),
-  };
-  const attachment = await attachmentFromFile(resume);
-  const result = await sendEmail(env, {
+  const textBody = `Job Application\n\nName: ${fullName}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nRole: ${role}\nExperience: ${experience || 'Not specified'}\nPortfolio / LinkedIn / GitHub: ${portfolio || 'Not provided'}\nMessage:\n${message || ''}\n*(Note: Resume file was submitted via form).*`;
+
+  const result = await sendEmailViaWeb3Forms({
     subject: `New Job Application: ${role} - ${fullName}`,
     replyTo: email,
-    attachments: [attachment],
-    html: `<h2>Job Application</h2><p><strong>Name:</strong> ${safe.name}</p><p><strong>Email:</strong> ${safe.email}</p><p><strong>Phone:</strong> ${safe.phone}</p><p><strong>Role:</strong> ${safe.role}</p><p><strong>Experience:</strong> ${safe.experience}</p><p><strong>Portfolio / LinkedIn / GitHub:</strong> ${safe.portfolio}</p><p><strong>Resume:</strong> Attached: ${safe.resume}</p><p><strong>Message:</strong></p><p>${safe.message}</p>`,
-    text: `Job Application\n\nName: ${fullName}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nRole: ${role}\nExperience: ${experience || 'Not specified'}\nPortfolio / LinkedIn / GitHub: ${portfolio || 'Not provided'}\nResume: Attached: ${resume.name}\nMessage:\n${message || ''}`,
+    text: textBody,
   });
 
-  return json({ success: true, message: 'Application submitted successfully! Your resume has been attached to the application email.', messageId: result.messageId }, 201);
+  return json({ success: true, message: 'Application submitted successfully!', messageId: result.messageId }, 201);
 }
 
 async function handleApi(request, env, ctx) {
@@ -273,12 +232,10 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     
-    // 1. Handle API routes
     if (url.pathname.startsWith('/api/')) {
       return setSecurityHeaders(await handleApi(request, env, ctx));
     }
 
-    // 2. Map standard paths to your HTML files in the public folder
     const pathToAsset = {
       '/': '/index.html',
       '/home': '/index.html',
@@ -297,11 +254,8 @@ export default {
       if (assetResponse.status !== 404) {
         return setSecurityHeaders(assetResponse);
       }
-    } catch (e) {
-      // Fall through to 404 if asset fetch fails
-    }
+    } catch (e) {}
 
-    // 3. Fallback to 404.html
     try {
       const notFoundUrl = new URL('/404.html', request.url);
       const notFound = await env.ASSETS.fetch(notFoundUrl);
