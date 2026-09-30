@@ -114,21 +114,28 @@
 
     .about-hero-heading {
       width: 100%;
-      max-width: none;
-      overflow: visible;
+      max-width: 100%;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+    @media (max-width: 639px) {
+      .about-hero-heading {
+        font-size: clamp(1.65rem, 6.2vw, 2.35rem) !important;
+        line-height: 1.15 !important;
+      }
     }
 
     .about-heading-line {
       display: block;
-      width: max-content;
+      width: 100%;
       max-width: 100%;
-      white-space: nowrap;
-      transform-origin: left center;
+      white-space: normal;
     }
-
-    .about-heading-line-1,
-    .about-heading-line-2 {
-      transform: none;
+    @media (min-width: 640px) {
+      .about-heading-line {
+        width: max-content;
+        white-space: nowrap;
+      }
     }
 
     .hero-mix-bg {
@@ -143,22 +150,19 @@
     .about-pillar-grid > div h3 { min-height: 3.5rem; display:flex; align-items:flex-start; }
     .about-pillar-grid > div p { min-height: 7.5rem; }
 
-    /* Keep Our Methodology / Problem-to-Solution section in its original alignment. */
     .methodology-section p {
       text-align: left !important;
       text-align-last: left !important;
     }
-    /* About Company hero copy keeps its original left alignment. */
     .about-hero-copy {
       text-align: left !important;
       text-align-last: left !important;
     }
-    /* Entire About Company section keeps original left-aligned body copy. */
     #about p {
       text-align: left !important;
       text-align-last: left !important;
     }
-</style>
+  </style>
 </head>
 
 <body class="text-zinc-300 overflow-x-hidden min-h-screen relative selection:bg-[#39d619]/30 selection:text-white bg-[#030503]">
@@ -188,8 +192,6 @@
         </div>
 
         <div class="flex items-center gap-2 flex-shrink-0">
-
-          <!-- Primary contact CTA (replaces the former account actions) -->
           <a href="/contact" class="hidden md:inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full bg-[#39d619] text-black font-orbitron text-[10px] lg:text-[11px] font-semibold uppercase tracking-[0.12em] hover:bg-white transition-all duration-300 shadow-[0_0_18px_rgba(57,214,25,0.18)]">
             Contact Us
             <iconify-icon icon="solar:arrow-right-linear" width="15"></iconify-icon>
@@ -229,7 +231,7 @@
           <span class="text-xs font-orbitron tracking-widest text-[#39d619] uppercase block mb-3 font-semibold">
             About HV Vertex Electronics
           </span>
-          <h1 class="about-hero-heading font-orbitron font-medium uppercase text-3xl sm:text-5xl lg:text-6xl text-white leading-[0.95] w-full">
+          <h1 class="about-hero-heading font-orbitron font-medium uppercase text-2xl sm:text-5xl lg:text-6xl text-white leading-tight sm:leading-[0.95] w-full">
             <span class="about-heading-line about-heading-line-1">Bridging Hardware</span>
             <span class="about-heading-line about-heading-line-2">With <span class="text-[#39d619]">Future Intelligence</span></span>
           </h1>
@@ -436,7 +438,6 @@
         icon.setAttribute('icon', 'solar:hamburger-menu-linear');
       }
     }
-
 
     window.addEventListener('scroll', () => {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
