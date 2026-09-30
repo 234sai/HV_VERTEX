@@ -273,11 +273,41 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     
+    // 1. Handle API routes
     if (url.pathname.startsWith('/api/')) {
       return setSecurityHeaders(await handleApi(request, env, ctx));
     }
 
-    const assetResponse = await env.ASSETS.fetch(request);
-    return setSecurityHeaders(assetResponse);
+    // 2. Map standard paths to your HTML files in the public folder
+    const pathToAsset = {
+      '/': '/index.html',
+      '/home': '/index.html',
+      '/products': '/products.html',
+      '/students': '/students.html',
+      '/about': '/about.html',
+      '/careers': '/careers.html',
+      '/contact': '/contact.html'
+    };
+
+    const target = pathToAsset[url.pathname] || url.pathname;
+    
+    try {
+      const assetUrl = new URL(target, request.url);
+      const assetResponse = await env.ASSETS.fetch(assetUrl);
+      if (assetResponse.status !== 404) {
+        return setSecurityHeaders(assetResponse);
+      }
+    } catch (e) {
+      // Fall through to 404 if asset fetch fails
+    }
+
+    // 3. Fallback to 404.html
+    try {
+      const notFoundUrl = new URL('/404.html', request.url);
+      const notFound = await env.ASSETS.fetch(notFoundUrl);
+      return setSecurityHeaders(new Response(notFound.body, { status: 404, headers: notFound.headers }));
+    } catch (e) {
+      return new Response("Not Found", { status: 404 });
+    }
   },
 };
