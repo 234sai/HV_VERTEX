@@ -5,22 +5,6 @@ const MAX_CONTACT_MESSAGE = 5000;
 const MAX_NAME = 100;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const PAGE_MAP = {
-  '/': '/index.html',
-  '/home': '/index.html',
-  '/home/': '/index.html',
-  '/products': '/products.html',
-  '/products/': '/products.html',
-  '/students': '/students.html',
-  '/students/': '/students.html',
-  '/about': '/about.html',
-  '/about/': '/about.html',
-  '/careers': '/careers.html',
-  '/careers/': '/careers.html',
-  '/contact': '/contact.html',
-  '/contact/': '/contact.html',
-};
-
 function json(data, status = 200, headers = {}) {
   return new Response(JSON.stringify(data), {
     status,
@@ -166,10 +150,10 @@ async function sendContact(request, env) {
   };
 
   const result = await sendEmail(env, {
-    subject: `New Contact Inquiry: ${service} - ${fullName}`,
+    subject: `New Contact Inquiry: ${service} -${fullName}`,
     replyTo: email,
-    html: `<h2>New Contact / Quote Inquiry</h2><p><strong>Name:</strong> ${safe.name}</p><p><strong>Email:</strong> ${safe.email}</p><p><strong>Phone:</strong> ${safe.phone}</p><p><strong>Service:</strong> ${safe.service}</p><p><strong>Message:</strong></p><p>${safe.message}</p>`,
-    text: `New Contact / Quote Inquiry\n\nName: ${fullName}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nService: ${service}\nMessage:\n${message}`,
+    html: `<h2>New Contact / Quote Inquiry</h2><p><strong>Name:</strong> ${safe.name}</p><p><strong>Email:</strong> ${safe.email}</p><p><strong>Phone:</strong>${safe.phone}</p><p><strong>Service:</strong> ${safe.service}</p><p><strong>Message:</strong></p><p>${safe.message}</p>`,
+    text: `New Contact / Quote Inquiry\n\nName: ${fullName}\nEmail: ${email}\nPhone:${phone || 'Not provided'}\nService: ${service}\nMessage:\n${message}`,
   });
 
   return json({ success: true, message: 'Thank you! Your message has been received. Our team will contact you shortly.', messageId: result.messageId }, 201);
@@ -212,8 +196,8 @@ async function sendStudent(request, env) {
     subject: `New Student Discount Application - ${fullName}`,
     replyTo: email,
     attachments: [attachment],
-    html: `<h2>Student Academic Discount Application</h2><p><strong>Name:</strong> ${safe.name}</p><p><strong>Email:</strong> ${safe.email}</p><p><strong>Phone:</strong> ${safe.phone}</p><p><strong>College / University:</strong> ${safe.college}</p><p><strong>Course / Branch / Year:</strong> ${safe.department}</p><p><strong>Request:</strong> Academic Discount Application</p><p><strong>Hardware / Components Required:</strong></p><p>${safe.hardware}</p><p><strong>Project / Purpose:</strong></p><p>${safe.project}</p><p><strong>Student Proof:</strong> Attached: ${safe.proof}</p>`,
-    text: `Student Academic Discount Application\n\nName: ${fullName}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nCollege / University: ${college}\nCourse / Branch / Year: ${department || 'Not provided'}\nRequest: Academic Discount Application\nHardware / Components Required:\n${hardware}\nProject / Purpose:\n${project || 'Not provided'}\nStudent Proof: Attached: ${proofName}`,
+    html: `<h2>Student Academic Discount Application</h2><p><strong>Name:</strong> ${safe.name}</p><p><strong>Email:</strong>${safe.email}</p><p><strong>Phone:</strong> ${safe.phone}</p><p><strong>College / University:</strong>${safe.college}</p><p><strong>Course / Branch / Year:</strong> ${safe.department}</p><p><strong>Request:</strong> Academic Discount Application</p><p><strong>Hardware / Components Required:</strong></p><p>${safe.hardware}</p><p><strong>Project / Purpose:</strong></p><p>${safe.project}</p><p><strong>Student Proof:</strong> Attached:${safe.proof}</p>`,
+    text: `Student Academic Discount Application\n\nName: ${fullName}\nEmail:${email}\nPhone: ${phone \vert{}\vert{} 'Not provided'}\nCollege / University:${college}\nCourse / Branch / Year: ${department \vert{}\vert{} 'Not provided'}\nRequest: Academic Discount Application\nHardware / Components Required:\n${hardware}\nProject / Purpose:\n${project \vert{}\vert{} 'Not provided'}\nStudent Proof: Attached:${proofName}`,
   });
 
   return json({ success: true, message: 'Student discount application received! Your student proof has been attached to the application email.', messageId: result.messageId }, 201);
@@ -256,11 +240,11 @@ async function sendCareer(request, env) {
   };
   const attachment = await attachmentFromFile(resume);
   const result = await sendEmail(env, {
-    subject: `New Job Application: ${role} - ${fullName}`,
+    subject: `New Job Application: ${role} -${fullName}`,
     replyTo: email,
     attachments: [attachment],
-    html: `<h2>Job Application</h2><p><strong>Name:</strong> ${safe.name}</p><p><strong>Email:</strong> ${safe.email}</p><p><strong>Phone:</strong> ${safe.phone}</p><p><strong>Role:</strong> ${safe.role}</p><p><strong>Experience:</strong> ${safe.experience}</p><p><strong>Portfolio / LinkedIn / GitHub:</strong> ${safe.portfolio}</p><p><strong>Resume:</strong> Attached: ${safe.resume}</p><p><strong>Message:</strong></p><p>${safe.message}</p>`,
-    text: `Job Application\n\nName: ${fullName}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nRole: ${role}\nExperience: ${experience || 'Not specified'}\nPortfolio / LinkedIn / GitHub: ${portfolio || 'Not provided'}\nResume: Attached: ${resume.name}\nMessage:\n${message || ''}`,
+    html: `<h2>Job Application</h2><p><strong>Name:</strong> ${safe.name}</p><p><strong>Email:</strong>${safe.email}</p><p><strong>Phone:</strong> ${safe.phone}</p><p><strong>Role:</strong>${safe.role}</p><p><strong>Experience:</strong> ${safe.experience}</p><p><strong>Portfolio / LinkedIn / GitHub:</strong>${safe.portfolio}</p><p><strong>Resume:</strong> Attached: ${safe.resume}</p><p><strong>Message:</strong></p><p>${safe.message}</p>`,
+    text: `Job Application\n\nName: ${fullName}\nEmail:${email}\nPhone: ${phone \vert{}\vert{} 'Not provided'}\nRole:${role}\nExperience: ${experience \vert{}\vert{} 'Not specified'}\nPortfolio / LinkedIn / GitHub:${portfolio || 'Not provided'}\nResume: Attached: ${resume.name}\nMessage:\n${message || ''}`,
   });
 
   return json({ success: true, message: 'Application submitted successfully! Your resume has been attached to the application email.', messageId: result.messageId }, 201);
@@ -289,33 +273,17 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     
-    // 1. Handle API routes
+    // 1. Intercept API calls
     if (url.pathname.startsWith('/api/')) {
       return setSecurityHeaders(await handleApi(request, env, ctx));
     }
 
-    // 2. Map the URL to the exact file path (e.g., '/' becomes '/index.html')
-    const targetPath = PAGE_MAP[url.pathname] || url.pathname;
-
-    // 3. Create a completely clean Request object to bypass Cloudflare header conflicts
-    const assetUrl = new URL(targetPath, request.url);
-    const cleanRequest = new Request(assetUrl);
-
-    // 4. Fetch the file directly
-    let assetResponse = await env.ASSETS.fetch(cleanRequest);
-
-    // 5. If the exact file is found, return it
-    if (assetResponse.status !== 404) {
-      return setSecurityHeaders(assetResponse);
-    }
-
-    // 6. If STILL not found, show your custom 404.html page
-    const notFoundUrl = new URL('/404.html', request.url);
-    const notFoundResponse = await env.ASSETS.fetch(new Request(notFoundUrl));
+    // 2. Delegate ALL other traffic directly to Cloudflare's native asset engine.
+    // By passing the EXACT original `request`, Cloudflare natively knows how to 
+    // map '/' to 'index.html' and automatically handles 404 pages.
+    const assetResponse = await env.ASSETS.fetch(request);
     
-    return setSecurityHeaders(new Response(notFoundResponse.body, { 
-      status: 404, 
-      headers: notFoundResponse.headers 
-    }));
+    // 3. Return the response with your security headers attached
+    return setSecurityHeaders(assetResponse);
   },
 };
