@@ -15,8 +15,15 @@ async function submitToFormsubmit(formData) {
       }
     });
     
-    const result = await response.json();
-    const isSuccess = response.ok && (result.success === "true" || result.success === true || result.success);
+    // FormSubmit returns JSON, handle safely
+    let result = {};
+    try {
+      result = await response.json();
+    } catch (e) {
+      // Fallback if response isn't JSON
+    }
+
+    const isSuccess = response.ok && (result.success === "true" || result.success === true || result.success || response.status === 200);
     
     return {
       ok: isSuccess,
@@ -88,8 +95,9 @@ async function handleStudentSubmit(event) {
   if (!hardware) return showFormStatus(status, false, 'Please tell us which hardware or components you need.');
 
   const formData = new FormData(form);
-  if (proofFile && !formData.has('attachment')) {
-    formData.append('attachment', proofFile, proofFile.name);
+  // Ensure FormSubmit receives the file under the explicit 'attachment' key
+  if (proofFile) {
+    formData.set('attachment', proofFile, proofFile.name);
   }
 
   setSubmitBusy(btn, true);
@@ -119,8 +127,9 @@ async function handleCareerSubmit(event) {
   }
 
   const formData = new FormData(form);
-  if (resumeFile && !formData.has('attachment')) {
-    formData.append('attachment', resumeFile, resumeFile.name);
+  // Ensure FormSubmit receives the resume file under the explicit 'attachment' key
+  if (resumeFile) {
+    formData.set('attachment', resumeFile, resumeFile.name);
   }
 
   setSubmitBusy(btn, true);
