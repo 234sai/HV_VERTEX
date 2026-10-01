@@ -1,10 +1,9 @@
-// HV VERTEX - Formsubmit.co Client Handler
-const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/hr@hvvertex.in";
+// HV VERTEX - Formsubmit.co Global AJAX Handler
+const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/hr@hvvertex.in";
 
-async function submitToFormsubmit(form, formData) {
+async function submitToFormsubmit(formData) {
   // Configure Formsubmit options
   if (!formData.has('_captcha')) formData.append('_captcha', 'false');
-  if (!formData.has('_next')) formData.append('_next', window.location.origin);
   if (!formData.has('_subject')) formData.append('_subject', 'New Website Submission - HV Vertex');
 
   try {
@@ -16,15 +15,16 @@ async function submitToFormsubmit(form, formData) {
       }
     });
     
-    const result = await response.json().catch(() => ({ success: true }));
+    const result = await response.json();
+    const isSuccess = response.ok && (result.success === "true" || result.success === true || result.success);
+    
     return {
-      ok: response.ok,
-      success: true,
-      message: 'Form submitted successfully! We will get back to you soon.'
+      ok: isSuccess,
+      message: result.message || (isSuccess ? 'Form submitted successfully! We will get back to you soon.' : 'Submission failed. Please try again.')
     };
   } catch (err) {
     console.error('Formsubmit Error:', err);
-    return { ok: false, success: false, message: 'Could not connect to submission service.' };
+    return { ok: false, message: 'Could not connect to submission service. Please check your connection.' };
   }
 }
 
@@ -59,7 +59,7 @@ async function handleContactSubmit(event) {
   const formData = new FormData(form);
 
   setSubmitBusy(btn, true);
-  const result = await submitToFormsubmit(form, formData);
+  const result = await submitToFormsubmit(formData);
   setSubmitBusy(btn, false, 'Send Inquiry Message');
   
   showFormStatus(status, result.ok, result.message);
@@ -93,7 +93,7 @@ async function handleStudentSubmit(event) {
   }
 
   setSubmitBusy(btn, true);
-  const result = await submitToFormsubmit(form, formData);
+  const result = await submitToFormsubmit(formData);
   setSubmitBusy(btn, false, 'Submit for Student Discount Coupon');
   
   showFormStatus(status, result.ok, result.message);
@@ -124,7 +124,7 @@ async function handleCareerSubmit(event) {
   }
 
   setSubmitBusy(btn, true);
-  const result = await submitToFormsubmit(form, formData);
+  const result = await submitToFormsubmit(formData);
   setSubmitBusy(btn, false, 'Submit Application');
   
   showFormStatus(status, result.ok, result.message);
